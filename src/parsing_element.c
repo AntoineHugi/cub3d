@@ -2,7 +2,8 @@
 
 void	skip_whitespaces(char **line)
 {
-		while (**line == ' ' || **line == '\t' || **line == '\n')
+		while (**line == ' ' || **line == '\t' || **line == '\f' 
+			|| **line == '\r')
 			(*line)++;
 		return ;
 }
@@ -15,10 +16,10 @@ void	get_floor_ceiling_info(t_game *game, char **line, char c)
 			*line = (*line) + 1;
 			skip_whitespaces(line);
 	}
-	if (c == 'C' && game->C_texture_path == NULL)
-		game->C_texture_path = ft_strdup(*line);
-	if (c == 'F' && game->F_texture_path == NULL)
-		game->F_texture_path = ft_strdup(*line);
+	if (c == 'C' && game->c_texture_path == NULL)
+		game->c_texture_path = ft_strdup(*line);
+	if (c == 'F' && game->f_texture_path == NULL)
+		game->f_texture_path = ft_strdup(*line);
 }
 
 /* saves the texture paths in the game struct */
@@ -29,14 +30,14 @@ void	get_wall_info(t_game *game, char **line, char c)
 			*line = (*line) + 2;
 			skip_whitespaces(line);
 	}
-	if (c == 'N' && game->NO_texture_path == NULL)
-		game->NO_texture_path = ft_strdup(*line);
-	if (c == 'E' && game->EA_texture_path == NULL)
-		game->EA_texture_path = ft_strdup(*line);
-	if (c == 'S' && game->SO_texture_path == NULL)
-		game->SO_texture_path = ft_strdup(*line);
-	if (c == 'W' && game->WE_texture_path == NULL)
-		game->WE_texture_path = ft_strdup(*line);
+	if (c == 'N' && game->no_texture_path == NULL)
+		game->no_texture_path = ft_strdup(*line);
+	if (c == 'E' && game->ea_texture_path == NULL)
+		game->ea_texture_path = ft_strdup(*line);
+	if (c == 'S' && game->so_texture_path == NULL)
+		game->so_texture_path = ft_strdup(*line);
+	if (c == 'W' && game->we_texture_path == NULL)
+		game->we_texture_path = ft_strdup(*line);
 }
 
 /* checker for the valid line */

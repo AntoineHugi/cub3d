@@ -2,12 +2,12 @@
 
 void	free_textures(t_game *game)
 {
-	free(game->NO_texture_path);
-	free(game->EA_texture_path);
-	free(game->SO_texture_path);
-	free(game->WE_texture_path);
-	free(game->C_texture_path);
-	free(game->F_texture_path);
+	free(game->no_texture_path);
+	free(game->ea_texture_path);
+	free(game->so_texture_path);
+	free(game->we_texture_path);
+	free(game->c_texture_path);
+	free(game->f_texture_path);
 }
 
 void	free_array(char **array)

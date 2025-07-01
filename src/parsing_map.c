@@ -13,13 +13,13 @@ int	invalid_player_num(t_game *game, int i)
 				|| game->file_array[i][j] == 'S' 
 				|| game->file_array[i][j] == 'W')
 			{
-				if (game->map.p_posx)
+				if (game->map->p_posx != -1)
 					return (1);
 				else
 				{
-					game->map.p_posx = j;
-					game->map.p_posy = i - game->map_start_line;
-					game->map.p_dir = game->file_array[i][j];
+					game->map->p_posx = j;
+					game->map->p_posy = i - game->map_start_line;
+					game->map->p_dir = game->file_array[i][j];
 				}
 			}
 			j++;
@@ -52,7 +52,7 @@ int	invalid_map_element(char **array, int i)
 
 int	parsing_map(t_game *game)
 {
-	//game->map = generate_map(game);
+	//game->map = create_map(game);
 	if (invalid_map_element(game->file_array, game->map_start_line))
 		parsing_error(game, "Invalid element on the map.\n");
 	if (invalid_player_num(game, game->map_start_line))

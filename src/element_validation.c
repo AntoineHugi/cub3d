@@ -3,13 +3,13 @@
 /* checks that the texture files can be opened (commented out since we don't have textures left)*/
 /*static int	valid_textures(t_game *game)
 {
-	if (open(game->NO_texture_path, O_RDONLY) == -1)
+	if (open(game->no_texture_path, O_RDONLY) == -1)
 		return (0);
-	if (open(game->EA_texture_path, O_RDONLY) == -1)
+	if (open(game->ea_texture_path, O_RDONLY) == -1)
 		return (0);
-	if (open(game->SO_texture_path, O_RDONLY) == -1)
+	if (open(game->so_texture_path, O_RDONLY) == -1)
 		return (0);
-	if (open(game->WE_texture_path, O_RDONLY) == -1)
+	if (open(game->we_texture_path, O_RDONLY) == -1)
 		return (0);
 	return (1);
 }*/
