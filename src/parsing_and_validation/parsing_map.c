@@ -3,24 +3,23 @@
 int	invalid_player_num(t_game *game, int i)
 {
 	int	j;
-	
+
 	while (game->file_array[i])
 	{
 		j = 0;
 		while (game->file_array[i][j])
 		{
-			if (game->file_array[i][j] == 'N' 
-				|| game->file_array[i][j] == 'E' 
+			if (game->file_array[i][j] == 'N' || game->file_array[i][j] == 'E'
 				|| game->file_array[i][j] == 'S' 
 				|| game->file_array[i][j] == 'W')
 			{
-				if (game->p_posx)
+				if (game->map.p_posx)
 					return (1);
 				else
 				{
-					game->p_posx = j;
-					game->p_posy = i - game->map_start_line;
-					game->p_dir = game->file_array[i][j];
+					game->map.p_posx = j;
+					game->map.p_posy = i - game->map_start_line;
+					game->map.p_dir = game->file_array[i][j];
 				}
 			}
 			j++;
@@ -53,23 +52,10 @@ int	invalid_map_element(char **array, int i)
 
 int	parsing_map(t_game *game)
 {
-	char	*line;
-	int		i;
-
-	i = 0;
-	game->p_posx = 0;
-	while (game->file_array[i] && !ft_isdigit(game->file_array[i][0]))
-		i++;
-	game->map_start_line = i;
-	if (invalid_map_element(game->file_array, i))
-	{
-		printf("invalid map element\n");
-		return (0);
-	}
-	if (invalid_player_num(game, i))
-	{
-		printf("invalid player num\n");
-		return (0);
-	}
+	//game->map = generate_map(game);
+	if (invalid_map_element(game->file_array, game->map_start_line))
+		parsing_error(game, "Invalid element on the map.\n");
+	if (invalid_player_num(game, game->map_start_line))
+		parsing_error(game, "Too many players.\n");
 	return (1);
 }

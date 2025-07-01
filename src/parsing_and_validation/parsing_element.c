@@ -14,9 +14,9 @@ void	get_floor_ceiling_info(t_game *game, char **line, char c)
 			*line = (*line) + 1;
 			skip_whitespaces(line);
 	}
-	if (c == 'C')
+	if (c == 'C' && game->C_texture_path == NULL)
 		game->C_texture_path = ft_strdup(*line);
-	if (c == 'F')
+	if (c == 'F' && game->F_texture_path == NULL)
 		game->F_texture_path = ft_strdup(*line);
 }
 
@@ -27,13 +27,13 @@ void	get_wall_info(t_game *game, char **line, char c)
 			*line = (*line) + 2;
 			skip_whitespaces(line);
 	}
-	if (c == 'N')
+	if (c == 'N' && game->NO_texture_path == NULL)
 		game->NO_texture_path = ft_strdup(*line);
-	if (c == 'E')
+	if (c == 'E' && game->EA_texture_path == NULL)
 		game->EA_texture_path = ft_strdup(*line);
-	if (c == 'S')
+	if (c == 'S' && game->SO_texture_path == NULL)
 		game->SO_texture_path = ft_strdup(*line);
-	if (c == 'W')
+	if (c == 'W' && game->WE_texture_path == NULL)
 		game->WE_texture_path = ft_strdup(*line);
 }
 

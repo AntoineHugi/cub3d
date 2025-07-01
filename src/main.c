@@ -42,24 +42,10 @@ int main (int argc, char **argv)
 	
 	if (input_validation(argc, argv))
 	{
-		game.file_array = file_array_creation(argv[1]);
-		if (!game.file_array)
+		if (file_validation(&game, argv[1]))
 		{
-			printf("cannot open map file\n");
-			//free_game(game);
-			return (0);
-		}
-		if (parsing_file(&game))
-		{
-			//init_game
-			printf("valid map\n");
-			return (1);
-		}
-		else
-		{
-			printf("parsing didn't work\n");
-			//free_game(game);
-			return (0);
+			printf("it worked!\n");
+			free_game(&game);
 		}
 	}
 	return (0);

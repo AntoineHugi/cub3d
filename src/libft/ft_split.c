@@ -1,4 +1,4 @@
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 static int	ft_str_count(char const *s, char c)
 {

@@ -1,4 +1,4 @@
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	*ft_gnl_calloc(size_t nmemb, size_t size)
 {

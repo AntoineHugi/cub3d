@@ -6,18 +6,23 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include "../src/libft/libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 128
-# endif
+typedef struct s_map {
+	int		map_height;
+	int		map_width;
+	char	**map_array;
+	int		p_posx;
+	int		p_posy;
+	int		p_dir;
+
+}			t_map;
 
 typedef struct s_game {
 	char	**file_array;
-	int	file_num_lines;
-	int	map_start_line;
-	int	p_posx;
-	int	p_posy;
-	int	p_dir;
+	t_map	map;
+	int		file_num_lines;
+	int		map_start_line;
 	char	*NO_texture_path;
 	char	*EA_texture_path;
 	char	*SO_texture_path;
@@ -27,12 +32,17 @@ typedef struct s_game {
 
 }			t_game;
 
-/* Cub3D functions */
-char	**file_array_creation(char *file);
+/* Cub3D Parsing functions */
+int	file_validation(t_game *game, char *file_path);
 int	parsing_file(t_game *game);
 int	parsing_element(t_game *game);
 int	parsing_map(t_game *game);
+int	valid_elements(t_game *game);
+int	valid_colors(t_game *game);
 
+/* Cub3D errors and freeing functions */
+void	free_game(t_game *game);
+void	parsing_error(t_game *game, char *err_msg);
 
 /* get_next_line and utils */
 char	*get_next_line(int fd);
@@ -46,6 +56,7 @@ void	*ft_gnl_calloc(size_t nmemb, size_t size);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
-int	ft_isdigit(int c);
+int		ft_isdigit(int c);
+int		ft_atoi(const char *nptr);
 
 #endif

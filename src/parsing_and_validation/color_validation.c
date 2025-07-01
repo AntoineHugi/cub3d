@@ -1,0 +1,95 @@
+#include "../inc/cub3d.h"
+
+static int	valid_rgb_value(char *value)
+{
+	int		value_int;
+
+	if (!value[0])
+		return (0);
+	value_int = ft_atoi(value);
+	if (value_int > 255 || value_int < 0)
+			return (0);
+	return (1);
+}
+
+static int	valid_rgb_code(char *input)
+{
+	char	value[4];
+	int		i;
+	int		j;
+
+	ft_bzero(value, 4);
+	i = 0;
+	j = 0;
+	while (input[i])
+	{
+		while (input[i] && ft_isdigit(input[i]))
+		{
+			if (j > 2)
+				return (0);
+			value[j] = input[i];
+			i++;
+			j++;
+		}
+		j = 0;
+		if (!valid_rgb_value(value))
+			return (0);
+		if (input[i] == ',')
+			i++;
+	}
+	return (1);
+}
+
+static int	valid_rgb_format(char *input)
+{
+	int	i;
+	int	element_counter;
+	int	code_counter;
+
+	i = 0;
+	element_counter = 1;
+	code_counter = 0;
+	while (input[i])
+	{
+		if (ft_isdigit(input[i]) && code_counter < 3)
+			code_counter++;
+		else if (ft_isdigit(input[i]) && code_counter > 3)
+			return (0);
+		else if (input[i] == ',' && i != 0 && element_counter < 3)
+		{
+			code_counter = 0;
+			element_counter++;
+		}
+		else
+			return (0);
+		i++;
+	}
+	if (element_counter != 3)
+		return (0);
+	return (1);
+}
+
+int	valid_colors(t_game *game)
+{
+	if (!valid_rgb_format(game->F_texture_path))
+	{
+		printf("invalid floor code\n");
+		return (0);
+	}
+	if (!valid_rgb_format(game->C_texture_path))
+	{
+		printf("invalid ceiling code\n");
+		return (0);
+	}
+	if (!valid_rgb_code(game->F_texture_path))
+	{
+		printf("invalid floor value\n");
+		return (0);
+	}
+	if (!valid_rgb_code(game->C_texture_path))
+	{
+		printf("invalid ceiling value\n");
+		return (0);
+	}
+	return (1);
+}
