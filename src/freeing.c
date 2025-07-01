@@ -23,6 +23,7 @@ void	free_array(char **array)
 	free(array);
 }
 
+/* Frees the game struct */
 void	free_game(t_game *game)
 {
 	free_array(game->file_array);

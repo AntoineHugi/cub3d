@@ -30,6 +30,7 @@ char	**file_array_creation(char *file_path)
 	return (file_array);
 }
 
+/* checks that the content in the file is valid */
 int	file_validation(t_game *game, char *file_path)
 {
 	game->file_array = file_array_creation(file_path);
@@ -37,6 +38,7 @@ int	file_validation(t_game *game, char *file_path)
 		return (0);
 	if (parsing_file(game))
 	{
+		/* ... */
 		return (1);
 	}
 	return (1);

@@ -7,6 +7,7 @@ void	skip_whitespaces(char **line)
 		return ;
 }
 
+/* saves the colors for the floor and ceiling in the game struct */
 void	get_floor_ceiling_info(t_game *game, char **line, char c)
 {
 	if (line[0][1] == ' ')
@@ -20,6 +21,7 @@ void	get_floor_ceiling_info(t_game *game, char **line, char c)
 		game->F_texture_path = ft_strdup(*line);
 }
 
+/* saves the texture paths in the game struct */
 void	get_wall_info(t_game *game, char **line, char c)
 {
 	if (line[0][2] == ' ')
@@ -37,6 +39,7 @@ void	get_wall_info(t_game *game, char **line, char c)
 		game->WE_texture_path = ft_strdup(*line);
 }
 
+/* checker for the valid line */
 int	valid_element_line(char *line)
 {
 	if (ft_strlen(line) > 3)
@@ -63,6 +66,7 @@ int	valid_element_line(char *line)
 	return (0);
 }
 
+/* checking that the file contains valid element line */
 int	parsing_element(t_game *game)
 {
 	char	*line;

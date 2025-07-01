@@ -1,5 +1,6 @@
 #include "../inc/cub3d.h"
 
+/* checks that the value is within the rgb range */
 static int	valid_rgb_value(char *value)
 {
 	int		value_int;
@@ -12,6 +13,7 @@ static int	valid_rgb_value(char *value)
 	return (1);
 }
 
+/* checks that the value is within the rgb range */
 static int	valid_rgb_code(char *input)
 {
 	char	value[4];
@@ -40,6 +42,7 @@ static int	valid_rgb_code(char *input)
 	return (1);
 }
 
+/* checks that RGB format is correct (3 ints of 3 digits max between commas) */
 static int	valid_rgb_format(char *input)
 {
 	int	i;
@@ -69,6 +72,7 @@ static int	valid_rgb_format(char *input)
 	return (1);
 }
 
+/* checks the floor and ceiling elements */
 int	valid_colors(t_game *game)
 {
 	if (!valid_rgb_format(game->F_texture_path))

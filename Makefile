@@ -5,8 +5,8 @@ CFLAGS     		:=	-Wall -Werror -Wextra #-fsanitize=address -g
 RM         		:=	rm -f
 SRC_DIR			:=	./src
 SRC_BONUS_DIR	:=	./src_bonus
-LIBFT_DIR		:=	./libft/
-LIBFT			:=	./libft/libft.a
+LIBFT_DIR		:=	./src/libft/
+LIBFT			:=	./src/libft/libft.a
 DEF_COLOUR 		:=	\033[0;39m
 GREEN      		:=	\033[1;92m
 
@@ -24,8 +24,9 @@ else
 endif
 
 # Sources and Objects
-SRCS       		:=	$(addprefix $(SRC_DIR)/, colours.c draw.c keys.c main.c \
-						parse.c render.c mapread.c utils.c)
+SRCS       		:=	$(addprefix $(SRC_DIR)/, main.c freeing.c error.c color_validation.c \
+						element_validation.c file_validation.c \
+						parsing_element.c parsing_file.c parsing_map.c)
 SRCS_BONUS 		:=	$(addprefix $(SRC_BONUS_DIR)/, colours_bonus.c draw_bonus.c \
 						keys_bonus.c main_bonus.c parse_bonus.c render_bonus.c \
 						mapread_bonus.c utils_bonus.c)
@@ -52,7 +53,7 @@ else
 	@echo "$(GREEN) minilibx-macos already installed! ✔︎ $(DEF_COLOUR)"
 endif
 
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+$(SRC_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
 
 bonus: $(OBJS_BONUS) $(LIBFT) $(MLX)

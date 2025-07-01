@@ -44,19 +44,4 @@ int	valid_colors(t_game *game);
 void	free_game(t_game *game);
 void	parsing_error(t_game *game, char *err_msg);
 
-/* get_next_line and utils */
-char	*get_next_line(int fd);
-char	*ft_strchr_mod(char *s);
-char	*ft_gnl_strjoin(char *s1, char *s2);
-void	ft_gnl_memcpy(char *dst, char *src, size_t n);
-void	*ft_gnl_calloc(size_t nmemb, size_t size);
-
-
-/* libft functions */
-char	**ft_split(char const *s, char c);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s);
-int		ft_isdigit(int c);
-int		ft_atoi(const char *nptr);
-
 #endif

@@ -10,6 +10,7 @@ int	get_num_lines(t_game *game)
 	return (i);
 }
 
+/* checks that no elements are missing */
 int	all_elements(t_game *game)
 {
 	if (game->NO_texture_path == NULL)
@@ -27,14 +28,15 @@ int	all_elements(t_game *game)
 	return (1);
 }
 
+/* initialises values for some of the struct */
 void	init_game_struct(t_game *game)
 {
 	int		i;
 
 	i = 0;
-	game->file_num_lines = get_num_lines(game);
 	while (game->file_array[i] && !ft_isdigit(game->file_array[i][0]))
 		i++;
+	game->file_num_lines = get_num_lines(game);
 	game->map_start_line = i;
 	game->NO_texture_path = NULL;
 	game->EA_texture_path = NULL;
@@ -45,6 +47,7 @@ void	init_game_struct(t_game *game)
 	game->map.p_posx = 0;
 }
 
+/* parsing the file to check the two parts: elements and map */
 int	parsing_file(t_game *game)
 {
 	init_game_struct(game);
