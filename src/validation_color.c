@@ -9,7 +9,7 @@ static int	valid_rgb_value(char *value)
 		return (0);
 	value_int = ft_atoi(value);
 	if (value_int > 255 || value_int < 0)
-			return (0);
+		return (0);
 	return (1);
 }
 
@@ -20,15 +20,13 @@ static int	valid_rgb_code(char *input)
 	int		i;
 	int		j;
 
-	ft_bzero(value, 4);
 	i = 0;
 	j = 0;
 	while (input[i])
 	{
+		ft_bzero(value, 4);
 		while (input[i] && ft_isdigit(input[i]))
 		{
-			if (j > 2)
-				return (0);
 			value[j] = input[i];
 			i++;
 			j++;
@@ -36,7 +34,7 @@ static int	valid_rgb_code(char *input)
 		j = 0;
 		if (!valid_rgb_value(value))
 			return (0);
-		if (input[i] == ',')
+		if (input[i])
 			i++;
 	}
 	return (1);
@@ -92,6 +90,7 @@ int	valid_colors(t_game *game)
 	}
 	if (!valid_rgb_code(game->c_texture_path))
 	{
+		printf("ceiling descripion is %s\n", game->c_texture_path);
 		printf("invalid ceiling value\n");
 		return (0);
 	}

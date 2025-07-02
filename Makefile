@@ -24,12 +24,11 @@ else
 endif
 
 # Sources and Objects
-SRCS       		:=	$(addprefix $(SRC_DIR)/, main.c freeing.c error.c color_validation.c \
-						element_validation.c file_validation.c \
-						parsing_element.c parsing_file.c parsing_map.c)
-SRCS_BONUS 		:=	$(addprefix $(SRC_BONUS_DIR)/, colours_bonus.c draw_bonus.c \
-						keys_bonus.c main_bonus.c parse_bonus.c render_bonus.c \
-						mapread_bonus.c utils_bonus.c)
+SRCS       		:=	$(addprefix $(SRC_DIR)/, main.c freeing.c error.c map_creation.c \
+						parsing_element.c parsing_file.c validation_color.c \
+						validation_element.c validation_file.c validation_map.c )
+SRCS_BONUS 		:=	$(addprefix $(SRC_BONUS_DIR)/, main_bonus.c \
+						utils_bonus.c)
 OBJS			:=	$(SRCS:.c=.o)
 OBJS_BONUS		:=	$(SRCS_BONUS:.c=.o)
 

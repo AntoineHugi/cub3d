@@ -12,6 +12,7 @@ typedef struct s_map {
 	int		map_height;
 	int		map_width;
 	char	**map_array;
+	char	**map_validation;
 	int		p_posx;
 	int		p_posy;
 	char	p_dir;
@@ -33,16 +34,18 @@ typedef struct s_game {
 }			t_game;
 
 /* Parsing functions */
-int		file_validation(t_game *game, char *file_path);
-int		parsing_file(t_game *game);
+int		parsing_file(t_game *game, char *file_path);
+int		valid_file(t_game *game);
 int		parsing_element(t_game *game);
-int		parsing_map(t_game *game);
 int		valid_elements(t_game *game);
 int		valid_colors(t_game *game);
+int		valid_map(t_game *game);
+t_map	*create_map(t_game *game);
 
 /* errors and freeing functions */
 void	free_game(t_game *game);
-void	parsing_error(t_game *game, char *err_msg);
+void	free_map(t_map *map);
+void	validation_error(t_game *game);
 
 /* utils */
 void	skip_whitespaces(char **line);

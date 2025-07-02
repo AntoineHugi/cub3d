@@ -42,9 +42,10 @@ int main (int argc, char **argv)
 	
 	if (input_validation(argc, argv))
 	{
-		if (file_validation(&game, argv[1]))
+		if (parsing_file(&game, argv[1]))
 		{
 			printf("it worked!\n");
+			/* start window and game */
 			free_game(&game);
 		}
 	}

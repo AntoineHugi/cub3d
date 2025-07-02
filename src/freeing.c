@@ -15,18 +15,30 @@ void	free_array(char **array)
 	int i;
 
 	i = 0;
+	if (!array)
+		return;
 	while (array[i])
 	{
-		free (array[i]);
+		free(array[i]);
 		i++;
 	}
 	free(array);
+}
+
+void	free_map(t_map *map)
+{
+	if (!map)
+		return;
+	free_array(map->map_array);
+	free_array(map->map_validation);
+	free(map);
 }
 
 /* Frees the game struct */
 void	free_game(t_game *game)
 {
 	free_array(game->file_array);
+	free_map(game->map);
 	//free_array(game->map_array);
 	free_textures(game);
 }

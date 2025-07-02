@@ -72,11 +72,16 @@ int	parsing_element(t_game *game)
 {
 	char	*line;
 	int		i;
+	int		j;
 
 	i = 0;
-	while (game->file_array[i])
+	j = 0;
+	while (game->file_array[i] && i < game->map_start_line)
 	{
-		if (game->file_array[i][0] && !(ft_isdigit(game->file_array[i][0])))
+		while (game->file_array[i][j] == ' ' || game->file_array[i][j] == '\t' 
+			|| game->file_array[i][j] == '\f' || game->file_array[i][j] == '\r')
+			j++;
+		if (game->file_array[i][j] && !(ft_isdigit(game->file_array[i][j])))
 		{
 			line = game->file_array[i];
 			if (valid_element_line(line))
@@ -85,7 +90,10 @@ int	parsing_element(t_game *game)
 				get_floor_ceiling_info(game, &line, *line);
 			}
 			else
+			{
+				printf("Invalid line in file.\n");
 				return (0);
+			}
 		}
 		i++;
 	}

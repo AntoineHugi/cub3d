@@ -2,22 +2,40 @@
 
 char	**create_map_array(t_game *game, t_map *map)
 {
-	
+	char	**new_map;
+	int		i;
+	int		j;
+
+	i = game->map_start_line;
+	j = 0;
+	new_map = (char**)ft_calloc((map->map_height + 1), sizeof(char*));
+	if (!new_map)
+		return (NULL);
+	while (game->file_array[i] && j < map->map_height)
+	{
+		new_map[j] = ft_strdup(game->file_array[i]);
+		i++;
+		j++;
+	}
+	return (new_map);
 }
 
-int	get_map_heigth(t_game *game, int i)
+int	get_map_heigth(char **array, int i)
 {
 	int	j;
 	int	height;
 
+
 	height = i;
-	while (game->file_array[i])
+	while (array[i])
 	{
 		j = 0;
-		while (game->file_array[i][j] == ' ' || game->file_array[i][j] == '\t' 
-			|| game->file_array[i][j] == '\r' || game->file_array[i][j] == '\f')
+		while (array[i][j] == ' ' || array[i][j] == '\t' 
+			|| array[i][j] == '\r' || array[i][j] == '\f')
 			j++;
-		if (game->file_array[i][j] != '1')
+		if (array[i][j] != '1' && array[i][j] !=  ' ' && array[i][j] != '0' 
+				&& array[i][j] != 'N' && array[i][j] != 'E' 
+				&& array[i][j] != 'S' && array[i][j] != 'W')
 			break ;
 		i++;
 	}
@@ -31,10 +49,10 @@ int	get_map_width(t_game *game)
 
 	i = game->map_start_line;
 	max_width = 0;
-	while (game->file_array[i] && ft_isdigit(game->file_array[i][0]))
+	while (game->file_array[i])
 	{
-		if (ft_strlen(game->file_array[i]) > max_width)
-			max_width = ft_strlen(game->file_array[i]);
+		if ((int)ft_strlen(game->file_array[i]) > max_width)
+			max_width = (int)ft_strlen(game->file_array[i]);
 		i++;
 	}
 	return (max_width);
@@ -43,13 +61,26 @@ int	get_map_width(t_game *game)
 /* Not used yet */
 t_map	*create_map(t_game *game)
 {
-	t_map	*map;
+	t_map	*new_map;
 
-	map = (t_map*)malloc(sizeof(map));
-	map->map_width = get_map_width(game);
-	map->map_height = get_map_heigth(game, game->map_start_line);
-	map->p_posx == -1;
-	map->p_posy == -1;
-	map->p_posx == '\0';
-	map->map_array = create_map_array(game, map);
+	new_map = (t_map*)malloc(sizeof(t_map));
+	if (!new_map)
+	{
+		printf("Couldn't create map.\n");
+		return (NULL);
+	}
+	new_map->map_width = get_map_width(game);
+	new_map->map_height = get_map_heigth(game->file_array, game->map_start_line);
+	new_map->p_posx = -1;
+	new_map->p_posy = -1;
+	new_map->p_dir = '\0';
+	new_map->map_array = create_map_array(game, new_map);
+	new_map->map_validation = create_map_array(game, new_map);
+	if (!(new_map->map_array) || !(new_map->map_validation))
+	{
+		free_map(new_map);
+		printf("Couldn't create map.\n");
+		return (NULL);
+	}
+	return (new_map);
 }
