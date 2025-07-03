@@ -39,6 +39,5 @@ void	free_game(t_game *game)
 {
 	free_array(game->file_array);
 	free_map(game->map);
-	//free_array(game->map_array);
 	free_textures(game);
 }

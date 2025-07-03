@@ -1,15 +1,28 @@
 #include "../inc/cub3d.h"
 
+/* Making sure the map is the last element in the file (can there be empty lines at the end?) */
 int	map_not_last(t_game *game)
 {
-	if (game->map_start_line + game->map->map_height < game->file_num_lines)
+	int	index_left;
+	char	*line;
+
+	index_left = game->map_start_line + game->map->map_height;
+	while (game->file_array[index_left])
 	{
-		printf("Map is not at the end of the file.\n");
-		return (1);
+		line = remove_whitespaces(game->file_array[index_left], 0, 0);
+		if (line[0] && line[0] != '\n')
+		{
+			printf("Map is not at the end of the file.\n");
+			free(line);
+			return (1);
+		}
+		free(line);
+		index_left++;
 	}
 	return (0);
 }
 
+/* Making sure the map has 1 and only 1 player */
 int	invalid_player_num(t_map *map, int i, int j)
 {
 	while (map->map_array[i])
@@ -22,7 +35,7 @@ int	invalid_player_num(t_map *map, int i, int j)
 			{
 				if (map->p_posx != -1)
 				{
-					printf("Too many players.\n");
+					printf("Invalid map : too many players.\n");
 					return (1);
 				}
 				else
@@ -39,13 +52,14 @@ int	invalid_player_num(t_map *map, int i, int j)
 	return (0);
 }
 
+/* Checking for invalid characters on the map */
 int	invalid_map_element(char **array, int map_start)
 {
 	int	i;
 	int	j;
 
 	i = map_start;
-	while (array[i])
+	while (array[i] && array[i][0] != '\n')
 	{
 		j = 0;
 		while (array[i][j])
@@ -53,9 +67,9 @@ int	invalid_map_element(char **array, int map_start)
 			if (array[i][j] != ' ' && array[i][j] != '1'
 				&& array[i][j] != '0' && array[i][j] != 'N'
 				&& array[i][j] != 'E' && array[i][j] != 'S'
-				&& array[i][j] != 'W')
+				&& array[i][j] != 'W' && array[i][j] != '\n')
 				{
-					printf("Invalid element on the map.\n");
+					printf("Invalid element on the map : '%c'.\n", array[i][j]);
 					return (1);
 				}
 			j++;
@@ -65,14 +79,11 @@ int	invalid_map_element(char **array, int map_start)
 	return (0);
 }
 
+/* Flood fill to make sure the map has no holes, starting from the player position */
 int	map_not_closed(t_map *map, int x, int y)
 {
 	int enclosed;
 
-	//printf("x = %i, y = %i\n", x, y);
-	//printf("map height = %i, map width = %i\n", map->map_height, map->map_width);
-
-	//printf("map at xy = %i\n", map->map_validation[y][x]);
 	enclosed = 0;
 	if (x < 0 || y < 0 || x >= map->map_width || y >= map->map_height)
 		return 1;
@@ -101,7 +112,7 @@ int	valid_map(t_game *game)
 		return (0);
 	if (game->map->p_posx == -1)
 	{
-		printf("No players.\n");
+		printf("Invalid map : no players.\n");
 		return (0);
 	}
 	if (map_not_closed(game->map, game->map->p_posx, game->map->p_posy))

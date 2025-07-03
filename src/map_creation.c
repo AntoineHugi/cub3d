@@ -1,5 +1,6 @@
 #include "../inc/cub3d.h"
 
+/* Creates an array of the map for easier use than the file array */
 char	**create_map_array(t_game *game, t_map *map)
 {
 	char	**new_map;
@@ -23,23 +24,23 @@ char	**create_map_array(t_game *game, t_map *map)
 int	get_map_heigth(char **array, int i)
 {
 	int	j;
-	int	height;
+	int	start;
 
 
-	height = i;
-	while (array[i])
+	start = i;
+	while (array[i] && array[i][0] != '\n')
 	{
 		j = 0;
 		while (array[i][j] == ' ' || array[i][j] == '\t' 
 			|| array[i][j] == '\r' || array[i][j] == '\f')
 			j++;
-		if (array[i][j] != '1' && array[i][j] !=  ' ' && array[i][j] != '0' 
-				&& array[i][j] != 'N' && array[i][j] != 'E' 
+		if (array[i][j] != '1' && array[i][j] !=  '\n' && array[i][j] != '0'
+				&& array[i][j] != 'N' && array[i][j] != 'E'
 				&& array[i][j] != 'S' && array[i][j] != 'W')
 			break ;
 		i++;
 	}
-	return (i - height);
+	return (i - start);
 }
 
 int	get_map_width(t_game *game)
@@ -58,7 +59,7 @@ int	get_map_width(t_game *game)
 	return (max_width);
 }
 
-/* Not used yet */
+/* Creates the map struct */
 t_map	*create_map(t_game *game)
 {
 	t_map	*new_map;

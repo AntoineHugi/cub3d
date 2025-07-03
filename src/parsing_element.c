@@ -1,69 +1,72 @@
 #include "../inc/cub3d.h"
 
-void	skip_whitespaces(char **line)
+/* Trims the element lines of whitespaces */
+char	*remove_whitespaces(char *str, int i, int j)
 {
-		while (**line == ' ' || **line == '\t' || **line == '\f' 
-			|| **line == '\r')
-			(*line)++;
-		return ;
+	char	*new_str;
+	int	new_len;
+
+	new_len = 0;
+	while(str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\r' && str[i] != '\f')
+			new_len++;
+		i++;
+	}
+	new_str = (char*)ft_calloc(new_len + 1, sizeof(char));
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\r' && str[i] != '\f')
+		{
+			new_str[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	return (new_str);
 }
 
-/* saves the colors for the floor and ceiling in the game struct */
-void	get_floor_ceiling_info(t_game *game, char **line, char c)
-{
-	if (line[0][1] == ' ')
-	{
-			*line = (*line) + 1;
-			skip_whitespaces(line);
-	}
-	if (c == 'C' && game->c_texture_path == NULL)
-		game->c_texture_path = ft_strdup(*line);
-	if (c == 'F' && game->f_texture_path == NULL)
-		game->f_texture_path = ft_strdup(*line);
-}
 
-/* saves the texture paths in the game struct */
-void	get_wall_info(t_game *game, char **line, char c)
+/* saves the element information in the game struct */
+int	get_element_info(t_game *game, char *line)
 {
-	if (line[0][2] == ' ')
+	if (line[0] == 'N' && game->no_texture_path == NULL)
+		game->no_texture_path = ft_strdup(line + 2);
+	else if (line[0] == 'E' && game->ea_texture_path == NULL)
+		game->ea_texture_path = ft_strdup(line + 2);
+	else if (line[0] == 'S' && game->so_texture_path == NULL)
+		game->so_texture_path = ft_strdup(line + 2);
+	else if (line[0] == 'W' && game->we_texture_path == NULL)
+		game->we_texture_path = ft_strdup(line + 2);
+	else if (line[0] == 'C' && game->c_texture_path == NULL)
+		game->c_texture_path = ft_strdup(line + 1);
+	else if (line[0] == 'F' && game->f_texture_path == NULL)
+		game->f_texture_path = ft_strdup(line + 1);
+	else
 	{
-			*line = (*line) + 2;
-			skip_whitespaces(line);
+		printf("Duplicate element.\n");
+		free(line);
+		return (0);
 	}
-	if (c == 'N' && game->no_texture_path == NULL)
-		game->no_texture_path = ft_strdup(*line);
-	if (c == 'E' && game->ea_texture_path == NULL)
-		game->ea_texture_path = ft_strdup(*line);
-	if (c == 'S' && game->so_texture_path == NULL)
-		game->so_texture_path = ft_strdup(*line);
-	if (c == 'W' && game->we_texture_path == NULL)
-		game->we_texture_path = ft_strdup(*line);
+	return (1);
 }
 
 /* checker for the valid line */
 int	valid_element_line(char *line)
 {
-	if (ft_strlen(line) > 3)
-	{
-		if (line[2] == ' ')
-		{
-			if (line[0] == 'N' && line[1] == 'O')
-				return (1);
-			if (line[0] == 'E' && line[1] == 'A')
-				return (1);
-			if (line[0] == 'S' && line[1] == 'O')
-				return (1);
-			if (line[0] == 'W' && line[1] == 'E')
-				return (1);
-		}
-		else if (line[1] == ' ')
-		{
-			if (line[0] == 'F')
-				return (1);
-			if (line[0] == 'C')
-				return (1);
-		}
-	}
+	if (line[0] == 'F' || line[0] == 'C')
+		return (1);
+	if (line[0] == 'N' && line[1] == 'O')
+		return (1);
+	if (line[0] == 'E' && line[1] == 'A')
+		return (1);
+	if (line[0] == 'S' && line[1] == 'O')
+		return (1);
+	if (line[0] == 'W' && line[1] == 'E')
+		return (1);
+	printf("Invalid line in file. Line is %s\n", line);
+	free(line);
 	return (0);
 }
 
@@ -71,31 +74,23 @@ int	valid_element_line(char *line)
 int	parsing_element(t_game *game)
 {
 	char	*line;
-	int		i;
-	int		j;
+	int	i;
 
 	i = 0;
-	j = 0;
 	while (game->file_array[i] && i < game->map_start_line)
 	{
-		while (game->file_array[i][j] == ' ' || game->file_array[i][j] == '\t' 
-			|| game->file_array[i][j] == '\f' || game->file_array[i][j] == '\r')
-			j++;
-		if (game->file_array[i][j] && !(ft_isdigit(game->file_array[i][j])))
+		line = remove_whitespaces(game->file_array[i++], 0, 0);
+		if (line[0] && !(ft_isdigit(line[0])) && line[0] != '\n')
 		{
-			line = game->file_array[i];
 			if (valid_element_line(line))
 			{
-				get_wall_info(game, &line, *line);
-				get_floor_ceiling_info(game, &line, *line);
+				if (!get_element_info(game, line))
+					return (0);
 			}
 			else
-			{
-				printf("Invalid line in file.\n");
 				return (0);
-			}
 		}
-		i++;
+		free(line);
 	}
 	return (1);
 }

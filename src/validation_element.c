@@ -50,7 +50,10 @@ int	valid_elements(t_game *game)
 	if (!parsing_element(game))
 		return (0);
 	if (!all_elements(game))
-		printf("Some element types are missing.\n");
+	{
+		printf("Some element types are missing or placed after the map.\n");
+		return (0);
+	}
 //	if (!valid_textures(game))
 //		return (0);
 	if (!valid_colors(game))

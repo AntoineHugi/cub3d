@@ -48,6 +48,6 @@ void	free_map(t_map *map);
 void	validation_error(t_game *game);
 
 /* utils */
-void	skip_whitespaces(char **line);
+char	*remove_whitespaces(char *str, int i, int j);
 
 #endif
