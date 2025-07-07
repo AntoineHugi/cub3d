@@ -15,7 +15,7 @@ char	*remove_whitespaces(char *str, int i, int j)
 	}
 	new_str = (char*)ft_calloc(new_len + 1, sizeof(char));
 	i = 0;
-	while (str[i])
+	while (str[i] && str[i] != '\n')
 	{
 		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\r' && str[i] != '\f')
 		{

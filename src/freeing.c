@@ -1,6 +1,18 @@
 #include "../inc/cub3d.h"
 
-void	free_textures(t_game *game)
+void	free_texture_img(t_game *game)
+{
+	if (game->no_wall.xpm_ptr)
+		mlx_destroy_image(game->mlx, game->no_wall.xpm_ptr);
+	if (game->ea_wall.xpm_ptr)
+		mlx_destroy_image(game->mlx, game->ea_wall.xpm_ptr);
+	if (game->so_wall.xpm_ptr)
+		mlx_destroy_image(game->mlx, game->so_wall.xpm_ptr);
+	if (game->we_wall.xpm_ptr)
+		mlx_destroy_image(game->mlx, game->we_wall.xpm_ptr);
+}
+
+void	free_texture_path(t_game *game)
 {
 	free(game->no_texture_path);
 	free(game->ea_texture_path);
@@ -39,5 +51,14 @@ void	free_game(t_game *game)
 {
 	free_array(game->file_array);
 	free_map(game->map);
-	free_textures(game);
+	free_texture_path(game);
+	free_texture_img(game);
+	if (game->mlx)
+	{
+		if (game->win)
+			mlx_destroy_window(game->mlx, game->win);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
 }
+

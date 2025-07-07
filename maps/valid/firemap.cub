@@ -1,7 +1,7 @@
-NO ../textures/firemap/Wall_N.xpm
-EA ../textures/firemap/Wall_E.xpm
-SO ../textures/firemap/Wall_S.xpm
-WE ../textures/firemap/Wall_W.xpm
+NO textures/firemap/Wall_N.xpm
+EA textures/firemap/Wall_E.xpm
+SO textures/firemap/Wall_S.xpm
+WE textures/firemap/Wall_W.xpm
 
 F 2,2,2
 C 50,10,0

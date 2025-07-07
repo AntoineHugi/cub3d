@@ -42,7 +42,6 @@ int	invalid_player_num(t_map *map, int i, int j)
 				{
 					map->p_posx = j;
 					map->p_posy = i;
-					map->p_dir = map->map_array[i][j];
 				}
 			}
 			j++;

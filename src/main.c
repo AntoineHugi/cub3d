@@ -44,8 +44,11 @@ int main (int argc, char **argv)
 	{
 		if (parsing_file(&game, argv[1]))
 		{
-			printf("it worked!\n");
-			/* start window and game */
+			initialise_game(&game);
+			//render_map(&game);
+			mlx_key_hook(game.win, key_hook, &game);
+			mlx_hook(game.win, 17, 0L, exit_app, &game);
+			mlx_loop(game.mlx);
 			free_game(&game);
 		}
 	}

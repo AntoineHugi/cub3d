@@ -30,6 +30,8 @@ int	get_map_start_line(char **array)
 void	init_game_struct(t_game *game)
 {
 	game->map_start_line = get_map_start_line(game->file_array);
+	game->mlx = NULL;
+	game->win = NULL;
 	game->map = NULL;
 	game->no_texture_path = NULL;
 	game->ea_texture_path = NULL;
@@ -37,6 +39,10 @@ void	init_game_struct(t_game *game)
 	game->we_texture_path = NULL;
 	game->c_texture_path = NULL;
 	game->f_texture_path = NULL;
+	game->no_wall.xpm_ptr = NULL;
+	game->ea_wall.xpm_ptr = NULL;
+	game->so_wall.xpm_ptr = NULL;
+	game->we_wall.xpm_ptr = NULL;
 }
 
 /* generates an array from the content of the cub file for parsing */
