@@ -1,5 +1,6 @@
 #include "../inc/cub3d.h"
 
+/* checks current view, then rotates */
 static void	look_right(t_map *map)
 {
 	char	direction;
@@ -15,6 +16,7 @@ static void	look_right(t_map *map)
 		map->map_array[map->p_posy][map->p_posx] = 'N';
 }
 
+/* checks current view, then rotates */
 static void	look_left(t_map *map)
 {
 	char	direction;
@@ -30,6 +32,7 @@ static void	look_left(t_map *map)
 		map->map_array[map->p_posy][map->p_posx] = 'S';
 }
 
+/* checks which direction to rotate */
 void	turn_view(t_game *game, int direction)
 {
 	//printf("player direction before:%c\n", game->map->map_array[game->map->p_posy][game->map->p_posx]);

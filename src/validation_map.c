@@ -97,7 +97,7 @@ int	map_not_closed(t_map *map, int x, int y)
 	enclosed += map_not_closed(map, x, y - 1);
 	return enclosed;
 }
-
+/* creates the map struct and checks that the map passes all the tests */
 int	valid_map(t_game *game)
 {
 	if (invalid_map_element(game->file_array, game->map_start_line))

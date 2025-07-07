@@ -1,7 +1,7 @@
 #include "../inc/cub3d.h"
 
-/* checks that the texture files can be opened (commented out since we don't have textures yet)*/
-/*static int	valid_textures(t_game *game)
+/* checks that the texture files can be opened */
+static int	valid_textures(t_game *game)
 {
 	if (open(game->no_texture_path, O_RDONLY) == -1)
 	{
@@ -24,7 +24,7 @@
 		return (0);
 	}
 	return (1);
-}*/
+}
 
 /* checks that no elements are missing */
 int	all_elements(t_game *game)
@@ -54,8 +54,8 @@ int	valid_elements(t_game *game)
 		printf("Some element types are missing or placed after the map.\n");
 		return (0);
 	}
-//	if (!valid_textures(game))
-//		return (0);
+	if (!valid_textures(game))
+		return (0);
 	if (!valid_colors(game))
 		return (0);
 	return (1);

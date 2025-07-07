@@ -1,5 +1,6 @@
 #include "../inc/cub3d.h"
 
+/* creates an individual texture into an image, this is malloc'd */
 static t_texture	new_texture(void *mlx, char *path, t_game *game)
 {
 	t_texture	texture;
@@ -7,10 +8,10 @@ static t_texture	new_texture(void *mlx, char *path, t_game *game)
 	texture.xpm_ptr = mlx_xpm_file_to_image(mlx, path, &texture.width, &texture.height);
 	if (texture.xpm_ptr == NULL)
 		initialisation_error(game, "Could not create wall texture.");
-	printf("width = %i. heigth = %i\n", texture.width, texture.height);
 	return (texture);
 }
 
+/* creates the textures for each wall */
 static void	initialise_textures(t_game *game)
 {
 	game->no_wall = new_texture(game->mlx, game->no_texture_path, game);
@@ -18,9 +19,11 @@ static void	initialise_textures(t_game *game)
 	game->so_wall = new_texture(game->mlx, game->so_texture_path, game);
 	game->we_wall = new_texture(game->mlx, game->we_texture_path, game);
 	//game->floor = new_sprite(game->mlx, game->f_texture_path, game);
-	//game->ceiling = new_sprite(game->mlx, game->no_texture_path, game);
+	//game->ceiling = new_sprite(game->mlx, game->c_texture_path, game);
+	//floor and ceiling are just colors, so not sure how to handle this yet
 }
 
+/* creates the mlx and window pointers, and intialises the textures for the walls into images to be used in rendering */
 void	initialise_game(t_game *game)
 {
 	game->mlx = mlx_init();

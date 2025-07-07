@@ -1,11 +1,13 @@
 #include "../inc/cub3d.h"
 
+/* quits the game with ESC or the X button */
 int	exit_app(t_game *game)
 {
 	free_game(game);
 	exit(1);
 }
 
+/* reads key press and goes into relevant function */
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == 119)

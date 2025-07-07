@@ -1,5 +1,6 @@
 #include "../inc/cub3d.h"
 
+/* checks if move is possible, then moves (keeping the same view direction) */
 static void	move_up(t_map *map)
 {
 	char	direction;
@@ -13,6 +14,7 @@ static void	move_up(t_map *map)
 	}
 }
 
+/* checks if move is possible, then moves (keeping the same view direction) */
 static void	move_down(t_map *map)
 {
 	char	direction;
@@ -26,6 +28,7 @@ static void	move_down(t_map *map)
 	}
 }
 
+/* checks if move is possible, then moves (keeping the same view direction) */
 static void	move_left(t_map *map)
 {
 	char	direction;
@@ -39,6 +42,7 @@ static void	move_left(t_map *map)
 	}
 }
 
+/* checks if move is possible, then moves (keeping the same view direction) */
 static void	move_right(t_map *map)
 {
 	char	direction;
@@ -51,7 +55,7 @@ static void	move_right(t_map *map)
 		map->p_posx++;
 	}
 }
-
+/* checks which direction to move */
 void	check_move(t_game *game, int direction)
 {
 	//printf("player position before: x=%i, y=%i\n", game->map->p_posx, game->map->p_posy);

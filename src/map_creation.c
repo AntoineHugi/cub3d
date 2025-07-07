@@ -74,7 +74,6 @@ t_map	*create_map(t_game *game)
 	new_map->map_height = get_map_heigth(game->file_array, game->map_start_line);
 	new_map->p_posx = -1;
 	new_map->p_posy = -1;
-	new_map->p_dir = '\0';
 	new_map->map_array = create_map_array(game, new_map);
 	new_map->map_validation = create_map_array(game, new_map);
 	if (!(new_map->map_array) || !(new_map->map_validation))
