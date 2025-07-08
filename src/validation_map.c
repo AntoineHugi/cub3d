@@ -109,7 +109,7 @@ int	valid_map(t_game *game)
 		return (0);
 	if (invalid_player_num(game->map, 0, 0))
 		return (0);
-	if (game->map->p_posx == -1)
+	if (game->map->p_posx == -1 || game->map->p_posx == -1)
 	{
 		printf("Invalid map : no players.\n");
 		return (0);

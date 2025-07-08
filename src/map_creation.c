@@ -64,7 +64,7 @@ t_map	*create_map(t_game *game)
 {
 	t_map	*new_map;
 
-	new_map = (t_map*)malloc(sizeof(t_map));
+	new_map = (t_map *)malloc(sizeof(t_map));
 	if (!new_map)
 	{
 		printf("Couldn't create map.\n");

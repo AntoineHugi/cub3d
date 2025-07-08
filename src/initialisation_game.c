@@ -18,9 +18,6 @@ static void	initialise_textures(t_game *game)
 	game->ea_wall = new_texture(game->mlx, game->ea_texture_path, game);
 	game->so_wall = new_texture(game->mlx, game->so_texture_path, game);
 	game->we_wall = new_texture(game->mlx, game->we_texture_path, game);
-	//game->floor = new_sprite(game->mlx, game->f_texture_path, game);
-	//game->ceiling = new_sprite(game->mlx, game->c_texture_path, game);
-	//floor and ceiling are just colors, so not sure how to handle this yet
 }
 
 /* creates the mlx and window pointers, and intialises the textures for the walls into images to be used in rendering */
