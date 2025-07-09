@@ -18,8 +18,8 @@ void	free_texture_path(t_game *game)
 	free(game->ea_texture_path);
 	free(game->so_texture_path);
 	free(game->we_texture_path);
-	free(game->c_texture_path);
-	free(game->f_texture_path);
+	free(game->c_color_code);
+	free(game->f_color_code);
 }
 
 void	free_array(char **array)

@@ -38,10 +38,10 @@ int	get_element_info(t_game *game, char *line)
 		game->so_texture_path = ft_strdup(line + 2);
 	else if (line[0] == 'W' && game->we_texture_path == NULL)
 		game->we_texture_path = ft_strdup(line + 2);
-	else if (line[0] == 'C' && game->c_texture_path == NULL)
-		game->c_texture_path = ft_strdup(line + 1);
-	else if (line[0] == 'F' && game->f_texture_path == NULL)
-		game->f_texture_path = ft_strdup(line + 1);
+	else if (line[0] == 'C' && game->c_color_code == NULL)
+		game->c_color_code = ft_strdup(line + 1);
+	else if (line[0] == 'F' && game->f_color_code == NULL)
+		game->f_color_code = ft_strdup(line + 1);
 	else
 	{
 		printf("Duplicate element.\n");

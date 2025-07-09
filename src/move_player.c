@@ -1,78 +1,64 @@
 #include "../inc/cub3d.h"
 
-/* checks if move is possible, then moves (keeping the same view direction) */
+/* checks if move is possible, then moves */
 static void	move_forward(t_map *map)
 {
-	char	view;
 	char	**array;
 
 	array = map->map_array;
-	view = array[map->p_posy][map->p_posx];
-	if (array[map->p_posy + map->p_dir_y][map->p_posx + map->p_dir_x] != '1')
-	{
-		array[map->p_posy + map->p_dir_y][map->p_posx + map->p_dir_x] = view;
-		array[map->p_posy][map->p_posx] = '0';
-		map->p_posx = map->p_posx + map->p_dir_x;
-		map->p_posy = map->p_posy + map->p_dir_y;
-	}
+	if (array[(int)(map->p_posy + map->p_dir_x * map->move_speed)] \
+		[(int)map->p_posx] != '1')
+		map->p_posy += map->p_dir_x * map->move_speed;
+	if (array[(int)map->p_posy] \
+		[(int)(map->p_posx + map->p_dir_y * map->move_speed)] != '1')
+		map->p_posx += map->p_dir_y * map->move_speed;
 }
 
-/* checks if move is possible, then moves (keeping the same view direction) */
+/* checks if move is possible, then moves */
 static void	move_backward(t_map *map)
 {
-	char	view;
 	char	**array;
 
 	array = map->map_array;
-	view = array[map->p_posy][map->p_posx];
-	if (array[map->p_posy - map->p_dir_y][map->p_posx - map->p_dir_x] != '1')
-	{
-		array[map->p_posy - map->p_dir_y][map->p_posx - map->p_dir_x] = view;
-		array[map->p_posy][map->p_posx] = '0';
-		map->p_posx = map->p_posx - map->p_dir_x;
-		map->p_posy = map->p_posy - map->p_dir_y;
-	}
+	if (array[(int)(map->p_posy - map->p_dir_x * map->move_speed)] \
+		[(int)map->p_posx] != '1')
+		map->p_posy -= map->p_dir_x * map->move_speed;
+	if (array[(int)map->p_posy] \
+		[(int)(map->p_posx - map->p_dir_y * map->move_speed)] != '1')
+		map->p_posx -= map->p_dir_y * map->move_speed;
 }
 
-/* checks if move is possible, then moves (keeping the same view direction) */
+/* checks if move is possible, then moves sideways */
 static void	move_left(t_map *map)
 {
-	char	view;
 	char	**array;
 
 	array = map->map_array;
-	view = array[map->p_posy][map->p_posx];
-	if (array[map->p_posy + map->p_dir_x][map->p_posx + map->p_dir_y] != '1')
-	{
-		array[map->p_posy + map->p_dir_x][map->p_posx + map->p_dir_y] = view;
-		array[map->p_posy][map->p_posx] = '0';
-		map->p_posx = map->p_posx + map->p_dir_y;
-		map->p_posy = map->p_posy + map->p_dir_x;
-	}
+	if (array[(int)(map->p_posy - (map->p_dir_y * map->move_speed))] \
+		[(int)map->p_posx] != '1')
+		map->p_posy -= map->p_dir_y * map->move_speed;
+	if (array[(int)map->p_posy] \
+		[(int)(map->p_posx + (map->p_dir_x * map->move_speed))] != '1')
+		map->p_posx += map->p_dir_x * map->move_speed;
 }
 
-/* checks if move is possible, then moves (keeping the same view direction) */
+/* checks if move is possible, then moves sideways */
 static void	move_right(t_map *map)
 {
-	char	view;
 	char	**array;
 
 	array = map->map_array;
-	view = array[map->p_posy][map->p_posx];
-	if (array[map->p_posy - map->p_dir_x][map->p_posx - map->p_dir_y] != '1')
-	{
-		array[map->p_posy - map->p_dir_x][map->p_posx - map->p_dir_y] = view;
-		array[map->p_posy][map->p_posx] = '0';
-		map->p_posx = map->p_posx - map->p_dir_y;
-		map->p_posy = map->p_posy - map->p_dir_x;
-	}
+	if (array[(int)(map->p_posy + (map->p_dir_y * map->move_speed))] \
+		[(int)map->p_posx] != '1')
+		map->p_posy += map->p_dir_y * map->move_speed;
+	if (array[(int)map->p_posy] \
+		[(int)(map->p_posx - (map->p_dir_x * map->move_speed))] != '1')
+		map->p_posx -= map->p_dir_x * map->move_speed;
 }
 
 /* checks which direction to move */
 void	check_move(t_game *game, int direction)
 {
-	//printf("player view direction: %c\n", game->map->map_array[game->map->p_posy][game->map->p_posx]);
-	//printf("player position before: x=%i:y=%i\n", game->map->p_posx, game->map->p_posy);
 	update_player_dir(game->map);
 	if (direction == FORWARD)
 		move_forward(game->map);
@@ -82,5 +68,4 @@ void	check_move(t_game *game, int direction)
 		move_left(game->map);
 	if (direction == RIGHT)
 		move_right(game->map);
-	//printf("player position after: x=%i:y=%i\n\n", game->map->p_posx, game->map->p_posy);
 }

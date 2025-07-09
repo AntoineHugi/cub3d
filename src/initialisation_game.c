@@ -32,5 +32,6 @@ void	initialise_game(t_game *game)
 	if (game->win == NULL)
 		initialisation_error(game, "Window initialisation failed.");
 	initialise_textures(game);
+	game->map->map_array[(int)game->map->p_posx][(int)game->map->p_posy] = '0';
 	init_raycasting(&game->rc, game->map);
 }

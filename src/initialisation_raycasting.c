@@ -9,22 +9,22 @@ void	get_direction_and_plane(t_raycasting *ray, t_map *map, double cpv)
 	ray->p_dir_y = 0;
 	ray->plane_x = 0;
 	ray->plane_y = 0;
-	if (map->map_array[map->p_posy][map->p_posx] == 'N')
+	if (map->p_view == 'N')
 	{
 		ray->p_dir_y = -1;
 		ray->plane_x = cpv;
 	}
-	if (map->map_array[map->p_posy][map->p_posx] == 'S')
+	if (map->p_view == 'S')
 	{
 		ray->p_dir_y = 1;
 		ray->plane_x = -cpv;
 	}
-	if (map->map_array[map->p_posy][map->p_posx] == 'E')
+	if (map->p_view == 'E')
 	{
 		ray->p_dir_x = 1;
 		ray->plane_y = cpv;
 	}
-	if (map->map_array[map->p_posy][map->p_posx] == 'W')
+	if (map->p_view == 'W')
 	{
 		ray->p_dir_x = -1;
 		ray->plane_y = -cpv;

@@ -73,22 +73,22 @@ static int	valid_rgb_format(char *input)
 /* checks the floor and ceiling elements */
 int	valid_colors(t_game *game)
 {
-	if (!valid_rgb_format(game->f_texture_path))
+	if (!valid_rgb_format(game->f_color_code))
 	{
 		printf("Invalid floor format.\n");
 		return (0);
 	}
-	if (!valid_rgb_format(game->c_texture_path))
+	if (!valid_rgb_format(game->c_color_code))
 	{
 		printf("Invalid ceiling format.\n");
 		return (0);
 	}
-	if (!valid_rgb_code(game->f_texture_path))
+	if (!valid_rgb_code(game->f_color_code))
 	{
 		printf("Invalid floor code.\n");
 		return (0);
 	}
-	if (!valid_rgb_code(game->c_texture_path))
+	if (!valid_rgb_code(game->c_color_code))
 	{
 		printf("Invalid ceiling code.\n");
 		return (0);

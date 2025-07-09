@@ -37,9 +37,9 @@ int	all_elements(t_game *game)
 		return (0);
 	if (game->we_texture_path == NULL)
 		return (0);
-	if (game->c_texture_path == NULL)
+	if (game->c_color_code == NULL)
 		return (0);
-	if (game->f_texture_path == NULL)
+	if (game->f_color_code == NULL)
 		return (0);
 	return (1);
 }

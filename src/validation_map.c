@@ -40,8 +40,9 @@ int	invalid_player_num(t_map *map, int i, int j)
 				}
 				else
 				{
-					map->p_posx = j;
-					map->p_posy = i;
+					map->p_posx = j + 0.5;
+					map->p_posy = i + 0.5;
+					map->p_view = map->map_array[i][j];
 				}
 			}
 			j++;

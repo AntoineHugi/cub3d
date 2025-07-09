@@ -37,8 +37,8 @@ void	init_game_struct(t_game *game)
 	game->ea_texture_path = NULL;
 	game->so_texture_path = NULL;
 	game->we_texture_path = NULL;
-	game->c_texture_path = NULL;
-	game->f_texture_path = NULL;
+	game->c_color_code = NULL;
+	game->f_color_code = NULL;
 	game->no_wall.xpm_ptr = NULL;
 	game->ea_wall.xpm_ptr = NULL;
 	game->so_wall.xpm_ptr = NULL;
