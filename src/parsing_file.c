@@ -19,7 +19,7 @@ int	get_map_start_line(char **array)
 			|| array[i][j] == 'W')
 		{
 			if (array[i][j + 1] == '1' || array[i][j + 1] == '0')
-				break ; 
+				break ;
 		}
 		i++;
 	}
@@ -56,9 +56,9 @@ void	file_array_creation(t_game *game, char *file_path)
 	if (fd == -1)
 	{
 		printf("Cannot open map file.\n");
-		return;
+		return ;
 	}
-	game->file_array = (char**)ft_calloc((game->file_num_lines + 1), sizeof(char*));
+	game->file_array = (char **)ft_calloc((game->file_num_lines + 1), sizeof(char *));
 	i = 0;
 	file_line = get_next_line(fd);
 	while (file_line)
@@ -71,12 +71,13 @@ void	file_array_creation(t_game *game, char *file_path)
 	close(fd);
 	return ;
 }
+
 /* Get number of lines in files, returns an error if file can't be opened or is empty */
 int	get_files_lines(char *file_path)
 {
 	int		fd;
 	int		num_lines;
-	char		*line;
+	char	*line;
 
 	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
@@ -91,14 +92,14 @@ int	get_files_lines(char *file_path)
 		printf("File is empty.\n");
 		return (-1);
 	}
-	while(line)
+	while (line)
 	{
 		num_lines++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	close (fd);
-	return(num_lines);
+	return (num_lines);
 }
 
 /* parsing the file to check the two parts: elements and map */

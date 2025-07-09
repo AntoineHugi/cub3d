@@ -20,7 +20,8 @@ static void	initialise_textures(t_game *game)
 	game->we_wall = new_texture(game->mlx, game->we_texture_path, game);
 }
 
-/* creates the mlx and window pointers, and intialises the textures for the walls into images to be used in rendering. Also initialises the ray casting info for the direction the player faces initially */
+/* creates the mlx and window pointers, and intialises the textures for the walls into images to be used in rendering. */
+/* Also initialises the ray casting info for the direction the player faces initially */
 void	initialise_game(t_game *game)
 {
 	game->mlx = mlx_init();

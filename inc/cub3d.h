@@ -15,8 +15,6 @@
 # define LEFT	4
 # define WIN_HEIGHT	512
 # define WIN_WIDTH	512
-# define FOV	60 * (3.141592 / 180) // 60 degrees field of view in radian
-# define CPV	tan(FOV / 2) // capture plane vector, used for ray casting, defines what is visible with the 60 degree field of view
 
 typedef struct s_texture {
 	void	*xpm_ptr;
@@ -97,8 +95,8 @@ void	render_map(t_game *game);
 void	calculate_raycasting(t_game *game, t_map *map, int i);
 
 /* key hooks */
-int	key_hook(int keycode, t_game *game);
-int	exit_app(t_game *game);
+int		key_hook(int keycode, t_game *game);
+int		exit_app(t_game *game);
 
 /* movement */
 void	check_move(t_game *game, int direction);

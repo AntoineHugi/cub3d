@@ -4,16 +4,16 @@
 char	*remove_whitespaces(char *str, int i, int j)
 {
 	char	*new_str;
-	int	new_len;
+	int		new_len;
 
 	new_len = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\r' && str[i] != '\f')
 			new_len++;
 		i++;
 	}
-	new_str = (char*)ft_calloc(new_len + 1, sizeof(char));
+	new_str = (char *)ft_calloc(new_len + 1, sizeof(char));
 	i = 0;
 	while (str[i] && str[i] != '\n')
 	{
@@ -26,7 +26,6 @@ char	*remove_whitespaces(char *str, int i, int j)
 	}
 	return (new_str);
 }
-
 
 /* saves the element information in the game struct */
 int	get_element_info(t_game *game, char *line)
@@ -74,7 +73,7 @@ int	valid_element_line(char *line)
 int	parsing_element(t_game *game)
 {
 	char	*line;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (game->file_array[i] && i < game->map_start_line)

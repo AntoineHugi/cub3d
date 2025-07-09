@@ -65,7 +65,7 @@ static int	valid_rgb_format(char *input)
 			element_counter++;
 		}
 		else
-		{	
+		{
 			printf("wrong character '%c'\n", input[i]);
 			return (0);
 		}

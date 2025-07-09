@@ -26,6 +26,7 @@ void	get_distance_and_step(t_game *game, t_map *map)
 		game->rc.side_dist_y = (game->rc.ray_pos_y + 1.0 - map->p_posy) \
 			* game->rc.delta_dist_y;
 }
+
 /* logs the distance of the wall compared to the player */
 void	get_wall_distance(t_game *game, t_map *map)
 {
@@ -54,9 +55,9 @@ void	cast_ray(t_game *game, t_map *map)
 			game->rc.ray_pos_y += game->rc.step_y;
 			game->rc.side_hit = 1;
 		}
-		if (game->rc.ray_pos_x < 0 || game->rc.ray_pos_x >= map->map_width ||
-				game->rc.ray_pos_y < 0 || game->rc.ray_pos_y >= map->map_height)
-			break;
+		if (game->rc.ray_pos_x < 0 || game->rc.ray_pos_x >= map->map_width
+			|| game->rc.ray_pos_y < 0 || game->rc.ray_pos_y >= map->map_height)
+			break ;
 		if (map->map_array[game->rc.ray_pos_y][game->rc.ray_pos_x] == '1') 
 			game->rc.hit_wall = 1;
 	}

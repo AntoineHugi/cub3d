@@ -24,11 +24,11 @@ void	free_texture_path(t_game *game)
 
 void	free_array(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!array)
-		return;
+		return ;
 	while (array[i])
 	{
 		free(array[i]);
@@ -40,7 +40,7 @@ void	free_array(char **array)
 void	free_map(t_map *map)
 {
 	if (!map)
-		return;
+		return ;
 	free_array(map->map_array);
 	free_array(map->map_validation);
 	free(map);
@@ -61,4 +61,3 @@ void	free_game(t_game *game)
 		free(game->mlx);
 	}
 }
-

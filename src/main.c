@@ -36,10 +36,10 @@ int	input_validation(int argc, char **argv)
 	return (0);
 }
 
-int main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game	game;
-	
+
 	if (input_validation(argc, argv))
 	{
 		if (parsing_file(&game, argv[1]))

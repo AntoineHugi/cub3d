@@ -12,7 +12,7 @@ void	update_player_dir(t_map *map)
 	{
 		map->p_dir_x = 0;
 		map->p_dir_y = 1;
-	}	
+	}
 	else if (map->map_array[map->p_posy][map->p_posx] == 'E')
 	{
 		map->p_dir_x = 1;

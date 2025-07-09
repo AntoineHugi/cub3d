@@ -9,7 +9,7 @@ char	**create_map_array(t_game *game, t_map *map)
 
 	i = game->map_start_line;
 	j = 0;
-	new_map = (char**)ft_calloc((map->map_height + 1), sizeof(char*));
+	new_map = (char **)ft_calloc((map->map_height + 1), sizeof(char *));
 	if (!new_map)
 		return (NULL);
 	while (game->file_array[i] && j < map->map_height)
@@ -26,7 +26,6 @@ int	get_map_heigth(char **array, int i)
 	int	j;
 	int	start;
 
-
 	start = i;
 	while (array[i] && array[i][0] != '\n')
 	{
@@ -34,9 +33,9 @@ int	get_map_heigth(char **array, int i)
 		while (array[i][j] == ' ' || array[i][j] == '\t' 
 			|| array[i][j] == '\r' || array[i][j] == '\f')
 			j++;
-		if (array[i][j] != '1' && array[i][j] !=  '\n' && array[i][j] != '0'
-				&& array[i][j] != 'N' && array[i][j] != 'E'
-				&& array[i][j] != 'S' && array[i][j] != 'W')
+		if (array[i][j] != '1' && array[i][j] != '\n' && array[i][j] != '0'
+			&& array[i][j] != 'N' && array[i][j] != 'E'
+			&& array[i][j] != 'S' && array[i][j] != 'W')
 			break ;
 		i++;
 	}

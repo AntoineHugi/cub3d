@@ -67,6 +67,7 @@ static void	move_right(t_map *map)
 		map->p_posy = map->p_posy - map->p_dir_x;
 	}
 }
+
 /* checks which direction to move */
 void	check_move(t_game *game, int direction)
 {

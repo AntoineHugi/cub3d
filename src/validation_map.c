@@ -3,7 +3,7 @@
 /* Making sure the map is the last element in the file (can there be empty lines at the end?) */
 int	map_not_last(t_game *game)
 {
-	int	index_left;
+	int		index_left;
 	char	*line;
 
 	index_left = game->map_start_line + game->map->map_height;
@@ -67,10 +67,10 @@ int	invalid_map_element(char **array, int map_start)
 				&& array[i][j] != '0' && array[i][j] != 'N'
 				&& array[i][j] != 'E' && array[i][j] != 'S'
 				&& array[i][j] != 'W' && array[i][j] != '\n')
-				{
-					printf("Invalid element on the map : '%c'.\n", array[i][j]);
-					return (1);
-				}
+			{
+				printf("Invalid element on the map : '%c'.\n", array[i][j]);
+				return (1);
+			}
 			j++;
 		}
 		i++;
@@ -81,22 +81,23 @@ int	invalid_map_element(char **array, int map_start)
 /* Flood fill to make sure the map has no holes, starting from the player position */
 int	map_not_closed(t_map *map, int x, int y)
 {
-	int enclosed;
+	int	enclosed;
 
 	enclosed = 0;
 	if (x < 0 || y < 0 || x >= map->map_width || y >= map->map_height)
-		return 1;
+		return (1);
 	if (map->map_validation[y][x] == ' ' || map->map_validation[y][x] == '\0')
-		return 1;
+		return (1);
 	if (map->map_validation[y][x] == '1')
-		return 0;
+		return (0);
 	map->map_validation[y][x] = '1';
 	enclosed += map_not_closed(map, x + 1, y);
 	enclosed += map_not_closed(map, x - 1, y);
 	enclosed += map_not_closed(map, x, y + 1);
 	enclosed += map_not_closed(map, x, y - 1);
-	return enclosed;
+	return (enclosed);
 }
+
 /* creates the map struct and checks that the map passes all the tests */
 int	valid_map(t_game *game)
 {
