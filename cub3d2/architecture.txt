@@ -1,0 +1,113 @@
+Project Overview
+The goal is to create a 3D graphical representation of a maze from a first-person perspective, inspired by the game Wolfenstein 3D. We will use the principles of raycasting to render a dynamic view of the maze's interior.
+
+
+*** Phase 1: Setup and File Parsing ***
+	-- Set up the environment,
+	-- Validate scene map
+	-- Parse the .cub Scene File:
+		├── Element Parsing: The file will contain type identifiers followed by information.
+		├	Parser must handle
+		├	1. Textures:- NO, SO, WE, EA followed by the path to the texture file.
+		├	2. Colors:- F (Floor) and C (Ceiling) followed by R,G,B color codes.
+		├
+		├── Map Parsing: The map content must always be the last element in the file.
+		├	The map is a grid composed of only six possible characters:
+		├	-- 1 (wall)
+		├	-- 0 (empty space)
+		├	-- and N, S, E, or W for the player's starting position and orientation.
+		├	The map must be closed and surrounded by walls. If it is not, the program must exit and return an error.
+		├
+		├── Error Handling: In case of errors, the program must exit cleanly and display "Error\n" followed by an explicit error
+
+
+*** Phase 2: Graphics and Raycasting Engine ***
+This is the core of the project where the maze comes to life.
+	-- Window Management:
+		├── Open a window
+		├── ESC key or clicking the red cross on the window frame must close the window and quit the program cleanly.
+		├── implement minimizing, switching windows
+
+	-- Rendering Engine:
+		├── Floor and Ceiling: Draw the ceiling and floor using the two distinct colors specified in the .cub file.
+		├── Wall Rendering: Implement the raycasting algorithm to draw the walls.
+			For each column of the screen, cast a ray from the player's position to find the nearest wall.
+			Calculate the distance to the wall to determine its height on the screen.
+		├── Wall Texturing: Apply different textures to the walls based on which direction they face (North, South, East, West).
+			The paths to these textures are specified in the .cub file.
+
+
+*** Phase 3: Player Movement and Interaction ***
+	This phase makes the maze explorable.
+		Movement: Implement the W, A, S, and D keys to move the player's point of view forward, left, backward, and right through the maze.
+
+		Rotation: Use the left and right arrow keys to rotate the camera (look left and right).
+
+*** Bonus Features ***
+If your mandatory part is perfect and passes all evaluations, you can implement bonus features.
+	Wall collisions to prevent the player from walking through walls.
+	A minimap system displayed on the screen.
+	Doors that can open and close.
+	Animated sprites within the maze.
+	Mouse controls to rotate the point of view.
+
+
+File Structure
+
+├── cub3d.h
+├── Makefile
+├── engine/
+│   ├── engine_init.c
+│   ├── raycaster.c
+│   └── render.c
+├── main.c
+├── parser/
+│   ├── parser.c
+│   ├── parser_config.c
+│   ├── parser_map.c
+│   └── parser_utils.c
+├── player/
+│   ├── player_controls.c
+│   └── player_init.c
+└── utils/
+    ├── error.c
+    ├── memory.c
+    └── utils.c
+
+
+Projection Attributes and Dimensions
+	We are using a top-down coordinate system where y values increase downwards and x values increases to the right. To put the player inside the world, we need to define the player’s X coordinate, the player’s Y coordinate, and the angle that the player is facing to. These three attributes forms the “point of view” of the player.
+
+	├── Walls are always at 90° angle with the floor
+	├── Walls are made of cubes that have the same size (64 x 64 x 64 units)
+	│		The choice of 64 is arbitrary, but it will be useful to pick a number that is a
+	│		multiple of 2; because we can perform some arithmetic shift operations on such
+	│		number (shift operations are faster than multiplication or division). The
+	│		larger the size of the cube, the blockier the world will look like, but
+	│		smaller cube will make the rendering slower
+	│
+	├── Floor is always flat
+	├── Player/viewer’s height = 32
+	├── Player’s field of view (FOV) = 60°
+	├── Dimension of the Projection Plane = 320 x 200 units
+	│		This is a rectangular wall with the vertical dimension as 320 units and the
+	│		horizontal dimension 200 units.
+	├── Center of the Projection Plane = (160,100)
+	├── Distance from the Player to the Projection Plane = 277 units (160 / tan(30˚))
+	├── Angle between subsequent rays = 60/320 degrees
+	│		[320 units (columns) = 60°]
+	│		[1 unit (column) = 60° / 320] degrees
+
+	The “angle between subsequent rays” is also the “angle between subsequent columns.” This angle is used to loop/move from column to column. The distance between player to the projection plane will be used for SCALING.
+
+	Each wall can be viewed as collection of 320 vertical lines (or 320 wall slices). The ray on the extreme left of the FOV will be projected onto column 0 of the projection plane, and the right most ray will be projected onto column 319 of the projection plane. Therefore, to render such scene, we can simply trace 320 rays starting from left to right. This can be done in a loop. The following illustrates these steps:
+
+	Suppose that the player is put somewhere in the middle of grid coordinate (1,2) at a viewing angle of 45 degrees relative to the world, we can say that the player is in unit coordinate (96,160).
+
+	Based on the viewing angle, subtract 30 degrees (half of the FOV). Starting from column 0:
+	├── Cast a ray (draw an “imaginary” line extending from the player).
+	├── Trace the ray until it hits a wall.
+	├── Record the distance to the wall (the distance is equal to the length of the ray).
+	├── Add the angle increment so that the ray moves to the right (the value of the angle
+		increment is 60/320 degrees).
+	├── Repeat step 2 and 3 for each subsequent column until all 320 rays are cast.
