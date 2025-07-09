@@ -3,12 +3,12 @@
 /* creates an individual texture into an image, this is malloc'd */
 static t_texture	new_texture(void *mlx, char *path, t_game *game)
 {
-	t_texture	texture;
+	t_texture	t;
 
-	texture.xpm_ptr = mlx_xpm_file_to_image(mlx, path, &texture.width, &texture.height);
-	if (texture.xpm_ptr == NULL)
+	t.xpm_ptr = mlx_xpm_file_to_image(mlx, path, &t.width, &t.height);
+	if (t.xpm_ptr == NULL)
 		initialisation_error(game, "Could not create wall texture.");
-	return (texture);
+	return (t);
 }
 
 /* creates the textures for each wall */
@@ -20,8 +20,9 @@ static void	initialise_textures(t_game *game)
 	game->we_wall = new_texture(game->mlx, game->we_texture_path, game);
 }
 
-/* creates the mlx and window pointers, and intialises the textures for the walls into images to be used in rendering. */
-/* Also initialises the ray casting info for the direction the player faces initially */
+/* creates the mlx and window pointers*/
+/* and intialises the textures for the walls into images used in rendering. */
+/* Also initialises the ray casting info from the direction the player faces */
 void	initialise_game(t_game *game)
 {
 	game->mlx = mlx_init();
@@ -31,5 +32,5 @@ void	initialise_game(t_game *game)
 	if (game->win == NULL)
 		initialisation_error(game, "Window initialisation failed.");
 	initialise_textures(game);
-	init_raycasting(game, game->map);
+	init_raycasting(&game->rc, game->map);
 }

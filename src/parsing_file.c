@@ -29,7 +29,7 @@ int	get_map_start_line(char **array)
 /* initialises values for some of the struct */
 void	init_game_struct(t_game *game)
 {
-	game->map_start_line = get_map_start_line(game->file_array);
+	game->map_start_line = get_map_start_line(game->f_array);
 	game->mlx = NULL;
 	game->win = NULL;
 	game->map = NULL;
@@ -58,12 +58,12 @@ void	file_array_creation(t_game *game, char *file_path)
 		printf("Cannot open map file.\n");
 		return ;
 	}
-	game->file_array = (char **)ft_calloc((game->file_num_lines + 1), sizeof(char *));
+	game->f_array = (char **)ft_calloc((game->f_lines + 1), sizeof(char *));
 	i = 0;
 	file_line = get_next_line(fd);
 	while (file_line)
 	{
-		game->file_array[i] = ft_strdup(file_line);
+		game->f_array[i] = ft_strdup(file_line);
 		free(file_line);
 		file_line = get_next_line(fd);
 		i++;
@@ -72,7 +72,8 @@ void	file_array_creation(t_game *game, char *file_path)
 	return ;
 }
 
-/* Get number of lines in files, returns an error if file can't be opened or is empty */
+/* Get number of lines in files */
+/* returns an error if file can't be opened or is empty */
 int	get_files_lines(char *file_path)
 {
 	int		fd;
@@ -105,8 +106,8 @@ int	get_files_lines(char *file_path)
 /* parsing the file to check the two parts: elements and map */
 int	parsing_file(t_game *game, char *file_path)
 {
-	game->file_num_lines = get_files_lines(file_path);
-	if (game->file_num_lines == -1)
+	game->f_lines = get_files_lines(file_path);
+	if (game->f_lines == -1)
 		return (0);
 	file_array_creation(game, file_path);
 	init_game_struct(game);

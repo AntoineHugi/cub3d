@@ -1,15 +1,15 @@
 #include "../inc/cub3d.h"
 
-/* Making sure the map is the last element in the file (can there be empty lines at the end?) */
+/* Making sure the map is the last element in the file */
 int	map_not_last(t_game *game)
 {
 	int		index_left;
 	char	*line;
 
 	index_left = game->map_start_line + game->map->map_height;
-	while (game->file_array[index_left])
+	while (game->f_array[index_left])
 	{
-		line = remove_whitespaces(game->file_array[index_left], 0, 0);
+		line = remove_whitespaces(game->f_array[index_left], 0, 0);
 		if (line[0] && line[0] != '\n')
 		{
 			printf("Map is not at the end of the file.\n");
@@ -78,7 +78,8 @@ int	invalid_map_element(char **array, int map_start)
 	return (0);
 }
 
-/* Flood fill to make sure the map has no holes, starting from the player position */
+/* Flood fill to make sure the map has no holes, */
+/* starting from the player position */
 int	map_not_closed(t_map *map, int x, int y)
 {
 	int	enclosed;
@@ -101,7 +102,7 @@ int	map_not_closed(t_map *map, int x, int y)
 /* creates the map struct and checks that the map passes all the tests */
 int	valid_map(t_game *game)
 {
-	if (invalid_map_element(game->file_array, game->map_start_line))
+	if (invalid_map_element(game->f_array, game->map_start_line))
 		return (0);
 	game->map = create_map(game);
 	if (!game->map)

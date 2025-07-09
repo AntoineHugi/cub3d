@@ -49,7 +49,7 @@ void	free_map(t_map *map)
 /* Frees the game struct */
 void	free_game(t_game *game)
 {
-	free_array(game->file_array);
+	free_array(game->f_array);
 	free_map(game->map);
 	free_texture_path(game);
 	free_texture_img(game);

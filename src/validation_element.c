@@ -10,17 +10,17 @@ static int	valid_textures(t_game *game)
 	}
 	if (open(game->ea_texture_path, O_RDONLY) == -1)
 	{
-		printf("Can't find or open NO texture.\n");
+		printf("Can't find or open EA texture.\n");
 		return (0);
 	}
 	if (open(game->so_texture_path, O_RDONLY) == -1)
 	{
-		printf("Can't find or open NO texture.\n");
+		printf("Can't find or open SO texture.\n");
 		return (0);
 	}
 	if (open(game->we_texture_path, O_RDONLY) == -1)
 	{
-		printf("Can't find or open NO texture.\n");
+		printf("Can't find or open WE texture.\n");
 		return (0);
 	}
 	return (1);

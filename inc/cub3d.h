@@ -56,9 +56,9 @@ typedef struct s_raycasting {
 }			t_raycasting;
 
 typedef struct s_game {
-	char			**file_array;
+	char			**f_array;
 	t_map			*map;
-	int				file_num_lines;
+	int				f_lines;
 	int				map_start_line;
 	char			*no_texture_path;
 	char			*ea_texture_path;
@@ -88,11 +88,11 @@ t_map	*create_map(t_game *game);
 
 /* initialisation */
 void	initialise_game(t_game *game);
-void	init_raycasting(t_game *game, t_map *map);
+void	init_raycasting(t_raycasting *ray, t_map *map);
 
 /* rendering */
 void	render_map(t_game *game);
-void	calculate_raycasting(t_game *game, t_map *map, int i);
+void	calculate_raycasting(t_raycasting *ray, t_map *map, int i);
 
 /* key hooks */
 int		key_hook(int keycode, t_game *game);

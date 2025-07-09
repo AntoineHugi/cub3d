@@ -8,6 +8,7 @@ int	exit_app(t_game *game)
 }
 
 /* reads key press and goes into relevant function */
+/* rerenders after each key press */
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == 119)

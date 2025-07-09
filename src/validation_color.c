@@ -55,27 +55,18 @@ static int	valid_rgb_format(char *input)
 		if (ft_isdigit(input[i]) && code_counter < 3)
 			code_counter++;
 		else if (ft_isdigit(input[i]) && code_counter > 3)
-		{
-			printf("code counter : %i\n", code_counter);
 			return (0);
-		}
 		else if (input[i] == ',' && i != 0 && element_counter < 3)
 		{
 			code_counter = 0;
 			element_counter++;
 		}
 		else
-		{
-			printf("wrong character '%c'\n", input[i]);
 			return (0);
-		}
 		i++;
 	}
 	if (element_counter != 3)
-	{
-		printf("code counter : %i\n", code_counter);
 		return (0);
-	}
 	return (1);
 }
 
@@ -84,26 +75,22 @@ int	valid_colors(t_game *game)
 {
 	if (!valid_rgb_format(game->f_texture_path))
 	{
-		printf("floor descripion is:%s\n", game->f_texture_path);
-		printf("invalid floor format\n");
+		printf("Invalid floor format.\n");
 		return (0);
 	}
 	if (!valid_rgb_format(game->c_texture_path))
 	{
-		printf("ceiling descripion is %s\n", game->c_texture_path);
-		printf("invalid ceiling format\n");
+		printf("Invalid ceiling format.\n");
 		return (0);
 	}
 	if (!valid_rgb_code(game->f_texture_path))
 	{
-		printf("floor descripion is %s\n", game->f_texture_path);
-		printf("invalid floor code\n");
+		printf("Invalid floor code.\n");
 		return (0);
 	}
 	if (!valid_rgb_code(game->c_texture_path))
 	{
-		printf("ceiling descripion is %s\n", game->c_texture_path);
-		printf("invalid ceiling code\n");
+		printf("Invalid ceiling code.\n");
 		return (0);
 	}
 	return (1);

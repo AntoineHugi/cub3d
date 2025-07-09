@@ -12,9 +12,9 @@ char	**create_map_array(t_game *game, t_map *map)
 	new_map = (char **)ft_calloc((map->map_height + 1), sizeof(char *));
 	if (!new_map)
 		return (NULL);
-	while (game->file_array[i] && j < map->map_height)
+	while (game->f_array[i] && j < map->map_height)
 	{
-		new_map[j] = ft_strdup(game->file_array[i]);
+		new_map[j] = ft_strdup(game->f_array[i]);
 		i++;
 		j++;
 	}
@@ -49,10 +49,10 @@ int	get_map_width(t_game *game)
 
 	i = game->map_start_line;
 	max_width = 0;
-	while (game->file_array[i])
+	while (game->f_array[i])
 	{
-		if ((int)ft_strlen(game->file_array[i]) > max_width)
-			max_width = (int)ft_strlen(game->file_array[i]);
+		if ((int)ft_strlen(game->f_array[i]) > max_width)
+			max_width = (int)ft_strlen(game->f_array[i]);
 		i++;
 	}
 	return (max_width);
@@ -70,7 +70,7 @@ t_map	*create_map(t_game *game)
 		return (NULL);
 	}
 	new_map->map_width = get_map_width(game);
-	new_map->map_height = get_map_heigth(game->file_array, game->map_start_line);
+	new_map->map_height = get_map_heigth(game->f_array, game->map_start_line);
 	new_map->p_posx = -1;
 	new_map->p_posy = -1;
 	new_map->map_array = create_map_array(game, new_map);

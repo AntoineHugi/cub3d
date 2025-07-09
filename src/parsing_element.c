@@ -64,7 +64,7 @@ int	valid_element_line(char *line)
 		return (1);
 	if (line[0] == 'W' && line[1] == 'E')
 		return (1);
-	printf("Invalid line in file. Line is %s\n", line);
+	printf("Invalid line in file. Line is '%s'.\n", line);
 	free(line);
 	return (0);
 }
@@ -76,9 +76,9 @@ int	parsing_element(t_game *game)
 	int		i;
 
 	i = 0;
-	while (game->file_array[i] && i < game->map_start_line)
+	while (game->f_array[i] && i < game->map_start_line)
 	{
-		line = remove_whitespaces(game->file_array[i++], 0, 0);
+		line = remove_whitespaces(game->f_array[i++], 0, 0);
 		if (line[0] && !(ft_isdigit(line[0])) && line[0] != '\n')
 		{
 			if (valid_element_line(line))
