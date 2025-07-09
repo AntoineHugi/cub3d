@@ -51,15 +51,16 @@ static void	look_left(t_map *map)
 		map->map_array[map->p_posy][map->p_posx] = 'S';
 }
 
-/* checks which direction to rotate */
+/* checks which direction to rotate, and recalculates the plane and direction for the raycasting */
 void	turn_view(t_game *game, int direction)
 {
-	printf("player view direction before: %c\n", game->map->map_array[game->map->p_posy][game->map->p_posx]);
+	//printf("player view direction before: %c\n", game->map->map_array[game->map->p_posy][game->map->p_posx]);
 	if (direction == LEFT)
 		look_left(game->map);
 	if (direction == RIGHT)
 		look_right(game->map);
-	printf("player position: x=%i:y=%i\n", game->map->p_posx, game->map->p_posy);
+	//printf("player position: x=%i:y=%i\n", game->map->p_posx, game->map->p_posy);
 	update_player_dir(game->map);
-	printf("player view direction after: %c\n\n", game->map->map_array[game->map->p_posy][game->map->p_posx]);
+	init_raycasting(game, game->map);
+	//printf("player view direction after: %c\n\n", game->map->map_array[game->map->p_posy][game->map->p_posx]);
 }

@@ -70,8 +70,8 @@ static void	move_right(t_map *map)
 /* checks which direction to move */
 void	check_move(t_game *game, int direction)
 {
-	printf("player view direction: %c\n", game->map->map_array[game->map->p_posy][game->map->p_posx]);
-	printf("player position before: x=%i:y=%i\n", game->map->p_posx, game->map->p_posy);
+	//printf("player view direction: %c\n", game->map->map_array[game->map->p_posy][game->map->p_posx]);
+	//printf("player position before: x=%i:y=%i\n", game->map->p_posx, game->map->p_posy);
 	update_player_dir(game->map);
 	if (direction == FORWARD)
 		move_forward(game->map);
@@ -81,5 +81,5 @@ void	check_move(t_game *game, int direction)
 		move_left(game->map);
 	if (direction == RIGHT)
 		move_right(game->map);
-	printf("player position after: x=%i:y=%i\n\n", game->map->p_posx, game->map->p_posy);
+	//printf("player position after: x=%i:y=%i\n\n", game->map->p_posx, game->map->p_posy);
 }

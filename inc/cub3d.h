@@ -16,7 +16,7 @@
 # define WIN_HEIGHT	512
 # define WIN_WIDTH	512
 # define FOV	60 * (3.141592 / 180) // 60 degrees field of view in radian
-# define CPL	tan(FOV / 2) // capture plane view, used for ray casting
+# define CPV	tan(FOV / 2) // capture plane vector, used for ray casting, defines what is visible with the 60 degree field of view
 
 typedef struct s_texture {
 	void	*xpm_ptr;
@@ -36,12 +36,15 @@ typedef struct s_map {
 }			t_map;
 
 typedef struct s_raycasting {
-	int		ray_num;
+	int		hit_wall;
+	int		side_hit;
 	double	screen_pos;
 	double	ray_dir_x;
 	double	ray_dir_y;
-	int		p_pos[2];
-	int		p_dir[2];
+	int		p_dir_x;
+	int		p_dir_y;
+	double	plane_x;
+	double	plane_y;
 	int		dda_step[2];
 	int		ray_pos_x;
 	int		ray_pos_y;
@@ -87,9 +90,11 @@ t_map	*create_map(t_game *game);
 
 /* initialisation */
 void	initialise_game(t_game *game);
+void	init_raycasting(t_game *game, t_map *map);
 
 /* rendering */
 void	render_map(t_game *game);
+void	calculate_raycasting(t_game *game, t_map *map, int i);
 
 /* key hooks */
 int	key_hook(int keycode, t_game *game);
