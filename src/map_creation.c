@@ -30,7 +30,7 @@ int	get_map_heigth(char **array, int i)
 	while (array[i] && array[i][0] != '\n')
 	{
 		j = 0;
-		while (array[i][j] == ' ' || array[i][j] == '\t' 
+		while (array[i][j] == ' ' || array[i][j] == '\t'
 			|| array[i][j] == '\r' || array[i][j] == '\f')
 			j++;
 		if (array[i][j] != '1' && array[i][j] != '\n' && array[i][j] != '0'
@@ -73,8 +73,8 @@ t_map	*create_map(t_game *game)
 	new_map->map_height = get_map_heigth(game->f_array, game->map_start_line);
 	new_map->p_posx = -1.0;
 	new_map->p_posy = -1.0;
-	new_map->move_speed = 0.05;
-	new_map->rotation_speed = 0.1;
+	new_map->move_speed = 0.1;
+	new_map->rotation_speed = 0.05;
 	new_map->map_array = create_map_array(game, new_map);
 	new_map->map_validation = create_map_array(game, new_map);
 	if (!(new_map->map_array) || !(new_map->map_validation))

@@ -25,8 +25,8 @@ endif
 
 # Sources and Objects
 SRCS       		:=	$(addprefix $(SRC_DIR)/, error.c freeing.c initialisation_game.c initialisation_raycasting.c \
-						key_hooks.c	main.c map_creation.c move_player.c move_view.c parsing_element.c parsing_file.c \
-						raycasting_calculation.c render_map.c \
+						key_hooks.c main.c map_creation.c move_player.c move_view.c \
+						parsing_element.c parsing_file.c raycasting_calculation.c render_map.c \
 						validation_color.c validation_element.c validation_file.c validation_map.c )
 
 SRCS_BONUS 		:=	$(addprefix $(SRC_BONUS_DIR)/, main_bonus.c \
@@ -36,26 +36,29 @@ OBJS_BONUS		:=	$(SRCS_BONUS:.c=.o)
 
 
 all : $(LIBFT) $(MLX) $(NAME)
+
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFT_DIR) $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFT_DIR) $(MLX_FLAGS)
 	@echo "$(GREEN) $(NAME) ✔︎ $(DEF_COLOUR)"
+	@echo "$(GREEN) Usage: ./$(NAME) ./maps/valid/'select a map' ✔︎ $(DEF_COLOUR)"
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR)
+	@echo "$(GREEN) Compiled libft  ✔︎ $(DEF_COLOUR)"
 
 $(MLX):
 ifeq ($(shell uname), Linux)
-	if [ ! -d "$(MLX_DIR)" ]; then \
+	@if [ ! -d "$(MLX_DIR)" ]; then \
 		git clone $(MLX_URL) $(MLX_DIR); \
 	fi
-	$(MAKE) -C $(MLX_DIR)
+	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
 	@echo "$(GREEN) minilibx-linux installed! ✔︎ $(DEF_COLOUR)"
 else
 	@echo "$(GREEN) minilibx-macos already installed! ✔︎ $(DEF_COLOUR)"
 endif
 
-$(SRC_DIR)%.o: $(SRC_DIR)%.c
-	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+	@$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
 
 bonus: $(OBJS_BONUS) $(LIBFT) $(MLX)
 	$(MAKE) -C $(MLX_DIR)

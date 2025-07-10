@@ -27,6 +27,6 @@ int	key_hook(int keycode, t_game *game)
 		exit_app(game);
 	else
 		return (0);
-	//render_map(game);
+	render_map(game);
 	return (0);
 }

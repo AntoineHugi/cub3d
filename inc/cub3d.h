@@ -17,13 +17,19 @@
 # define WIN_WIDTH	512
 # define PI	3.14159265358979323846
 
-typedef struct s_texture {
-	void	*xpm_ptr;
-	int		width;
+typedef struct s_img
+{
+	void	*ptr;
+	int		*data;
+	int		bpp;
+	int		size_l;
+	int		endian;
 	int		height;
-}				t_texture;
+	int		width;
+}			t_img;
 
-typedef struct s_map {
+typedef struct s_map
+{
 	int		map_height;
 	int		map_width;
 	char	**map_array;
@@ -31,27 +37,30 @@ typedef struct s_map {
 	char	p_view;
 	double	p_posx;
 	double	p_posy;
-	double	p_dir_x;
-	double	p_dir_y;
+	//double	p_dir_x;
+	//double	p_dir_y;
 	double	p_angle;
 	double	move_speed;
 	double	rotation_speed;
 }			t_map;
 
-typedef struct s_raycasting {
-	int		p_dir_x;
-	int		p_dir_y;
+typedef struct s_raycasting
+{
+	double	p_dir_x;
+	double	p_dir_y;
 	double	plane_x;
 	double	plane_y;
-	int		ray_pos_x;
-	int		ray_pos_y;
+	int		map_x;
+	int		map_y;
+	double	ray_pos_x;
+	double	ray_pos_y;
 	int		wall_hit;
 	int		side_hit;
 	double	screen_pos;
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	delta_dist_x;
-	double	delta_dist_y; 
+	double	delta_dist_y;
 	double	side_dist_x;
 	double	side_dist_y;
 	int		step_x;
@@ -59,7 +68,23 @@ typedef struct s_raycasting {
 	double	wall_dist;
 }			t_raycasting;
 
-typedef struct s_game {
+typedef struct s_wall
+{
+	int		line_h;
+	int		start;
+	int		end;
+	int		tex_num;
+	double	wall_x;
+	t_img	*tex;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
+	int		color;
+}			t_wall;
+
+typedef struct s_game
+{
 	char			**f_array;
 	t_map			*map;
 	int				f_lines;
@@ -70,14 +95,17 @@ typedef struct s_game {
 	char			*we_texture_path;
 	char			*c_color_code;
 	char			*f_color_code;
-	t_texture		no_wall;
-	t_texture		ea_wall;
-	t_texture		so_wall;
-	t_texture		we_wall;
+	int				c_color_int;
+	int				f_color_int;
+	t_img			no_wall;
+	t_img			ea_wall;
+	t_img			so_wall;
+	t_img			we_wall;
 	void			*mlx;
 	void			*win;
 	t_raycasting	rc;
-}			t_game;
+	t_img			frame;
+}				t_game;
 
 /* Parsing functions */
 int		parsing_file(t_game *game, char *file_path);
@@ -107,6 +135,7 @@ void	turn_view(t_game *game, int direction);
 /* errors and freeing functions */
 void	free_game(t_game *game);
 void	free_map(t_map *map);
+void	free_array(char **array);
 void	validation_error(t_game *game);
 void	initialisation_error(t_game *game, char *error_msg);
 

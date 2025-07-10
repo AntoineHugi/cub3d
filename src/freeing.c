@@ -2,14 +2,14 @@
 
 void	free_texture_img(t_game *game)
 {
-	if (game->no_wall.xpm_ptr)
-		mlx_destroy_image(game->mlx, game->no_wall.xpm_ptr);
-	if (game->ea_wall.xpm_ptr)
-		mlx_destroy_image(game->mlx, game->ea_wall.xpm_ptr);
-	if (game->so_wall.xpm_ptr)
-		mlx_destroy_image(game->mlx, game->so_wall.xpm_ptr);
-	if (game->we_wall.xpm_ptr)
-		mlx_destroy_image(game->mlx, game->we_wall.xpm_ptr);
+	if (game->no_wall.ptr)
+		mlx_destroy_image(game->mlx, game->no_wall.ptr);
+	if (game->ea_wall.ptr)
+		mlx_destroy_image(game->mlx, game->ea_wall.ptr);
+	if (game->so_wall.ptr)
+		mlx_destroy_image(game->mlx, game->so_wall.ptr);
+	if (game->we_wall.ptr)
+		mlx_destroy_image(game->mlx, game->we_wall.ptr);
 }
 
 void	free_texture_path(t_game *game)
@@ -55,6 +55,8 @@ void	free_game(t_game *game)
 	free_texture_img(game);
 	if (game->mlx)
 	{
+		if (game->frame.ptr)
+			mlx_destroy_image(game->mlx, game->frame.ptr);
 		if (game->win)
 			mlx_destroy_window(game->mlx, game->win);
 		mlx_destroy_display(game->mlx);

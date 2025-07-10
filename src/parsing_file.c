@@ -10,7 +10,7 @@ int	get_map_start_line(char **array)
 	while (array[i])
 	{
 		j = 0;
-		while (array[i][j] == ' ' || array[i][j] == '\t' 
+		while (array[i][j] == ' ' || array[i][j] == '\t'
 			|| array[i][j] == '\r' || array[i][j] == '\f')
 			j++;
 		if (array[i][j] == '1' || array[i][j] == '0')
@@ -39,10 +39,6 @@ void	init_game_struct(t_game *game)
 	game->we_texture_path = NULL;
 	game->c_color_code = NULL;
 	game->f_color_code = NULL;
-	game->no_wall.xpm_ptr = NULL;
-	game->ea_wall.xpm_ptr = NULL;
-	game->so_wall.xpm_ptr = NULL;
-	game->we_wall.xpm_ptr = NULL;
 }
 
 /* generates an array from the content of the cub file for parsing */

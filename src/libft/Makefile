@@ -29,18 +29,19 @@ MY_HEADERS = libft.h
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
 all:	$(NAME)
+	@echo "Compiled libft"
 
 $(NAME): $(MY_OBJECTS)
-	ar rcs $(NAME) $(MY_OBJECTS) 
+	@ar rcs $(NAME) $(MY_OBJECTS) 
 
 %.o: %.c $(MY_HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean: 	
-	$(RM) $(MY_OBJECTS) $(MY_OBJECTS_BONUS)
+	@$(RM) $(MY_OBJECTS) $(MY_OBJECTS_BONUS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re:	fclean all
 
