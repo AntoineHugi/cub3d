@@ -1,5 +1,19 @@
 #include "../inc/cub3d.h"
 
+void	init_p_direction(t_map *map)
+{
+	if (map->p_view == 'N')
+		map->p_angle = PI / 2;
+	else if (map->p_view == 'S')
+		map->p_angle = 3 * PI;
+	else if (map->p_view == 'E')
+		map->p_angle = 0;
+	else if (map->p_view == 'W')
+		map->p_angle = PI;
+	map->p_dir_x = cos(map->p_angle);
+	map->p_dir_y = -sin(map->p_angle);
+}
+
 /* creates an individual texture into an image, this is malloc'd */
 static t_texture	new_texture(void *mlx, char *path, t_game *game)
 {
@@ -33,5 +47,6 @@ void	initialise_game(t_game *game)
 		initialisation_error(game, "Window initialisation failed.");
 	initialise_textures(game);
 	game->map->map_array[(int)game->map->p_posx][(int)game->map->p_posy] = '0';
+	init_p_direction(game->map);
 	init_raycasting(&game->rc, game->map);
 }

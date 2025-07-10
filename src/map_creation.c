@@ -73,7 +73,7 @@ t_map	*create_map(t_game *game)
 	new_map->map_height = get_map_heigth(game->f_array, game->map_start_line);
 	new_map->p_posx = -1.0;
 	new_map->p_posy = -1.0;
-	new_map->move_speed = 0.1;
+	new_map->move_speed = 0.05;
 	new_map->rotation_speed = 0.1;
 	new_map->map_array = create_map_array(game, new_map);
 	new_map->map_validation = create_map_array(game, new_map);

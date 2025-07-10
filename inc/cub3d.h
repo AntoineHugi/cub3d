@@ -15,6 +15,7 @@
 # define LEFT	4
 # define WIN_HEIGHT	512
 # define WIN_WIDTH	512
+# define PI	3.14159265358979323846
 
 typedef struct s_texture {
 	void	*xpm_ptr;
@@ -30,8 +31,9 @@ typedef struct s_map {
 	char	p_view;
 	double	p_posx;
 	double	p_posy;
-	int		p_dir_x;
-	int		p_dir_y;
+	double	p_dir_x;
+	double	p_dir_y;
+	double	p_angle;
 	double	move_speed;
 	double	rotation_speed;
 }			t_map;
@@ -101,7 +103,6 @@ int		exit_app(t_game *game);
 /* movement */
 void	check_move(t_game *game, int direction);
 void	turn_view(t_game *game, int direction);
-void	update_player_dir(t_map *map);
 
 /* errors and freeing functions */
 void	free_game(t_game *game);

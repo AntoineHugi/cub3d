@@ -59,7 +59,6 @@ static void	move_right(t_map *map)
 /* checks which direction to move */
 void	check_move(t_game *game, int direction)
 {
-	update_player_dir(game->map);
 	if (direction == FORWARD)
 		move_forward(game->map);
 	if (direction == BACKWARD)
