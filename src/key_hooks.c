@@ -11,19 +11,19 @@ int	exit_app(t_game *game)
 /* rerenders after each key press */
 int	key_hook(int keycode, t_game *game)
 {
-	if (keycode == 119)
+	if (keycode == KEY_W)
 		check_move(game, FORWARD);
-	else if (keycode == 115)
+	else if (keycode == KEY_S)
 		check_move(game, BACKWARD);
-	else if (keycode == 97)
+	else if (keycode == KEY_A)
 		check_move(game, LEFT);
-	else if (keycode == 100)
+	else if (keycode == KEY_D)
 		check_move(game, RIGHT);
-	else if (keycode == 65361)
+	else if (keycode == KEY_LEFT)
 		turn_view(game, LEFT);
-	else if (keycode == 65363)
+	else if (keycode == KEY_RIGHT)
 		turn_view(game, RIGHT);
-	else if (keycode == 65307)
+	else if (keycode == KEY_ESC)
 		exit_app(game);
 	else
 		return (0);
