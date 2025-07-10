@@ -34,7 +34,6 @@ void	get_direction_and_plane(t_raycasting *ray, t_map *map, double cpv)
 /* on every change of view direction, */
 /* calculate the necessary variables to do the ray casting. */
 /* This only happens at the start of the game, */
-/* or whenever the player changes direction */
 void	init_raycasting(t_raycasting *ray, t_map *map)
 {
 	double	fov;

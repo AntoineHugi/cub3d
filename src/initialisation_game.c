@@ -1,5 +1,6 @@
 #include "../inc/cub3d.h"
 
+/* saves the color code into an int */
 static int	save_color_int(char *str)
 {
 	char	**rgb;
