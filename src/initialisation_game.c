@@ -46,7 +46,8 @@ static void	initialise_textures(t_game *game)
 /* creates the mlx and window pointers*/
 /* and intialises the textures for the walls into images used in rendering. */
 /* Also initialises the ray casting info from the direction the player faces */
-void	initialise_game(t_game *game)
+
+int	initialise_game(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
@@ -64,4 +65,5 @@ void	initialise_game(t_game *game)
 	initialise_textures(game);
 	init_raycasting(&game->rc, game->map);
 	game->map->map_array[(int)game->map->p_posx][(int)game->map->p_posy] = '0';
+	return (1);
 }

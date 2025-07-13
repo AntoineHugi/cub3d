@@ -3,8 +3,10 @@
 /* quits the game with ESC or the X button */
 int	exit_app(t_game *game)
 {
-	free_game(game);
-	exit(1);
+	game->is_exiting = 1;
+	free_game(game, NULL);
+	exit(0);
+	return (0);
 }
 
 /* reads key press and goes into relevant function */

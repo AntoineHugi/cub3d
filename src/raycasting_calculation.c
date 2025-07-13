@@ -17,28 +17,24 @@ void	get_distance_and_step(t_raycasting *ray, t_map *map)
 	else
 		ray->step_y = 1;
 	if (ray->ray_dir_x < 0)
-		ray->side_dist_x = (map->p_posx - ray->map_x) \
-			* ray->delta_dist_x;
+		ray->side_dist_x = (map->p_posx - ray->map_x) * ray->delta_dist_x;
 	else
-		ray->side_dist_x = (ray->map_x + 1 - map->p_posx) \
-			* ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1 - map->p_posx) * ray->delta_dist_x;
 	if (ray->ray_dir_y < 0)
-		ray->side_dist_y = (map->p_posy - ray->map_y) \
-			* ray->delta_dist_y;
+		ray->side_dist_y = (map->p_posy - ray->map_y) * ray->delta_dist_y;
 	else
-		ray->side_dist_y = (ray->map_y + 1 - map->p_posy) \
-			* ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1 - map->p_posy) * ray->delta_dist_y;
 }
 
 /* logs the distance of the wall compared to the player */
 void	get_wall_distance(t_raycasting *ray, t_map *map)
 {
 	if (ray->side_hit == 0)
-		ray->wall_dist = (ray->map_x - map->p_posx + (1 - ray->step_x) / 2) \
-		/ ray->ray_dir_x;
+		ray->wall_dist = (ray->map_x - map->p_posx + (1 - ray->step_x) / 2)
+			/ ray->ray_dir_x;
 	else
-		ray->wall_dist = (ray->map_y - map->p_posy + (1 - ray->step_y) / 2) \
-		/ ray->ray_dir_y;
+		ray->wall_dist = (ray->map_y - map->p_posy + (1 - ray->step_y) / 2)
+			/ ray->ray_dir_y;
 	if (ray->wall_dist <= 0)
 		printf("wall dist is 0 or negative: %f\n", ray->wall_dist);
 }
@@ -61,8 +57,8 @@ void	cast_ray(t_raycasting *ray, t_map *map)
 			ray->map_y += ray->step_y;
 			ray->side_hit = 1;
 		}
-		if (ray->map_x < 0 || ray->map_x >= map->map_width
-			|| ray->map_y < 0 || ray->map_y >= map->map_height)
+		if (ray->map_x < 0 || ray->map_x >= map->map_width || ray->map_y < 0
+			|| ray->map_y >= map->map_height)
 			break ;
 		if (map->map_array[ray->map_y][ray->map_x] == '1')
 			ray->wall_hit = 1;

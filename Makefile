@@ -5,7 +5,7 @@ CFLAGS     		:=	-Wall -Werror -Wextra #-fsanitize=address -g
 RM         		:=	rm -f
 SRC_DIR			:=	./src
 SRC_BONUS_DIR	:=	./src_bonus
-LIBFT_DIR		:=	./src/libft/
+LIBFT_DIR		:=	./libft/
 LIBFT			:=	./src/libft/libft.a
 DEF_COLOUR 		:=	\033[0;39m
 GREEN      		:=	\033[1;92m
@@ -54,6 +54,7 @@ ifeq ($(shell uname), Linux)
 	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
 	@echo "$(GREEN) minilibx-linux installed! ✔︎ $(DEF_COLOUR)"
 else
+	@$(MAKE) -C $(MLX_DIR)
 	@echo "$(GREEN) minilibx-macos already installed! ✔︎ $(DEF_COLOUR)"
 endif
 
@@ -73,7 +74,6 @@ clean:
 	@echo "$(GREEN)Object files removed!$(DEF_COLOUR)"
 fclean: clean
 	rm -f $(NAME)
-	rm -rf $(MLX_DIR)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	@echo "$(NAME) removed!"
 re: fclean all

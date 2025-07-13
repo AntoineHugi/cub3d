@@ -47,7 +47,7 @@ void	free_map(t_map *map)
 }
 
 /* Frees the game struct */
-void	free_game(t_game *game)
+void	free_game(t_game *game, const char *error_message)
 {
 	free_array(game->f_array);
 	free_map(game->map);
@@ -59,7 +59,9 @@ void	free_game(t_game *game)
 			mlx_destroy_image(game->mlx, game->frame.ptr);
 		if (game->win)
 			mlx_destroy_window(game->mlx, game->win);
-		mlx_destroy_display(game->mlx);
+		// mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
+	if (error_message)
+		fprintf(stderr, "Error: %s\n", error_message);
 }

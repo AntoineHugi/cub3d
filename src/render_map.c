@@ -79,7 +79,7 @@ static void	render_ray(t_game *game, t_raycasting *ray, int x)
 
 /* then iterates through each ray and calculates the specific ray info */
 /* Finally, renders that ray on the screen */
-void	render_map(t_game *game)
+int	render_map(t_game *game)
 {
 	int	i;
 
@@ -95,4 +95,5 @@ void	render_map(t_game *game)
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->frame.ptr, 0, 0);
+	return (0);
 }

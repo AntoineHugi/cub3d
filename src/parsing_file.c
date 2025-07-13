@@ -108,6 +108,6 @@ int	parsing_file(t_game *game, char *file_path)
 	file_array_creation(game, file_path);
 	init_game_struct(game);
 	if (!valid_file(game))
-		validation_error(game);
+		validation_error(game, "Invalid file format or content.");
 	return (1);
 }
