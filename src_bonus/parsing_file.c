@@ -16,7 +16,7 @@ int	get_map_start_line(char **array)
 		if (array[i][j] == '1' || array[i][j] == '0')
 			break ;
 		else if (array[i][j] == 'N' || array[i][j] == 'E' || array[i][j] == 'S'
-			|| array[i][j] == 'W')
+			|| array[i][j] == 'W' || array[i][j] == 'D' || array[i][j] == 'O')
 		{
 			if (array[i][j + 1] == '1' || array[i][j + 1] == '0')
 				break ;
@@ -37,6 +37,8 @@ void	init_game_struct(t_game *game)
 	game->ea_texture_path = NULL;
 	game->so_texture_path = NULL;
 	game->we_texture_path = NULL;
+	game->d_texture_path = NULL;
+	game->o_texture_path = NULL;
 	game->c_color_code = NULL;
 	game->f_color_code = NULL;
 	game->mouse_x = 0;

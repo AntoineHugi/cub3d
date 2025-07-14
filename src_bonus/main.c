@@ -53,6 +53,7 @@ int	main(int argc, char **argv)
 	}
 	mlx_hook(game.win, 2, 1L << 0, key_hook, &game);
 	mlx_hook(game.win, 17, 0, exit_app, &game);
+	mlx_hook(game.win, 6, 1L << 6, mouse_move, &game);
 	mlx_loop_hook(game.mlx, render_map, &game);
 	mlx_loop(game.mlx);
 	return (EXIT_SUCCESS);

@@ -10,6 +10,10 @@ void	free_texture_img(t_game *game)
 		mlx_destroy_image(game->mlx, game->so_wall.ptr);
 	if (game->we_wall.ptr)
 		mlx_destroy_image(game->mlx, game->we_wall.ptr);
+	if (game->door_closed.ptr)
+		mlx_destroy_image(game->mlx, game->door_closed.ptr);
+	if (game->door_open.ptr)
+		mlx_destroy_image(game->mlx, game->door_open.ptr);
 }
 
 void	free_texture_path(t_game *game)
@@ -18,6 +22,10 @@ void	free_texture_path(t_game *game)
 	free(game->ea_texture_path);
 	free(game->so_texture_path);
 	free(game->we_texture_path);
+	if (game->d_texture_path)
+		free(game->d_texture_path);
+	if (game->o_texture_path)
+		free(game->o_texture_path);
 	free(game->c_color_code);
 	free(game->f_color_code);
 }

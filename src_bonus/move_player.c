@@ -6,13 +6,17 @@ void	make_move(t_map *map, double new_x, double new_y)
 	double	padding;
 	char	**array;
 
-	padding = 0.2;
+	padding = 0.15;
 	array = map->map_array;
 	if (array[(int)(map->p_posy)][(int)(new_x + padding)] != '1'
-		&& array[(int)(map->p_posy)][(int)(new_x - padding)] != '1')
+		&& array[(int)(map->p_posy)][(int)(new_x + padding)] != 'D'
+		&& array[(int)(map->p_posy)][(int)(new_x - padding)] != '1'
+		&& array[(int)(map->p_posy)][(int)(new_x - padding)] != 'D')
 		map->p_posx = new_x;
 	if (array[(int)(new_y + padding)][(int)(map->p_posx)] != '1'
-		&& array[(int)(new_y - padding)][(int)(map->p_posx)] != '1')
+		&& array[(int)(new_y + padding)][(int)(map->p_posx)] != 'D'
+		&& array[(int)(new_y - padding)][(int)(map->p_posx)] != '1'
+		&& array[(int)(new_y - padding)][(int)(map->p_posx)] != 'D')
 		map->p_posy = new_y;
 }
 

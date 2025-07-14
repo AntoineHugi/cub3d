@@ -2,7 +2,6 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
-# include "../minilibx_macos/mlx.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
@@ -17,18 +16,22 @@
 # define WIN_WIDTH 1024
 # define PI 3.14159265358979323846
 # ifdef __APPLE__
+#  include "../minilibx_macos/mlx.h"
 #  define KEY_W 13
 #  define KEY_S 1
 #  define KEY_A 0
 #  define KEY_D 2
+#  define KEY_E 14
 #  define KEY_LEFT 123
 #  define KEY_RIGHT 124
 #  define KEY_ESC 53
 # else
+#  include "../minilibx-linux/mlx.h"
 #  define KEY_W 119
 #  define KEY_S 115
 #  define KEY_A 97
 #  define KEY_D 100
+#  define KEY_E 101
 #  define KEY_LEFT 65361
 #  define KEY_RIGHT 65363
 #  define KEY_ESC 65307
@@ -108,6 +111,8 @@ typedef struct s_game
 	char			*ea_texture_path;
 	char			*so_texture_path;
 	char			*we_texture_path;
+	char			*d_texture_path;
+	char			*o_texture_path;
 	char			*c_color_code;
 	char			*f_color_code;
 	int				c_color_int;
@@ -116,11 +121,15 @@ typedef struct s_game
 	t_img			ea_wall;
 	t_img			so_wall;
 	t_img			we_wall;
+	t_img			door_closed;
+	t_img			door_open;
 	void			*mlx;
 	void			*win;
 	t_raycasting	rc;
 	t_img			frame;
 	int				is_exiting;
+	int				mouse_x;
+	int				mouse_y;
 }					t_game;
 
 /* Parsing functions */
@@ -140,13 +149,12 @@ void				init_raycasting(t_raycasting *ray, t_map *map);
 int					render_map(t_game *game);
 void				calculate_raycasting(t_raycasting *ray, t_map *map, int i);
 
-/* key hooks */
+/* hooks & movement */
 int					key_hook(int keycode, t_game *game);
 int					exit_app(t_game *game);
-
-/* movement */
-void				check_move(t_game *game, int direction);
+void				check_move(t_game *game, t_map *map, int direction);
 void				turn_view(t_game *game, int direction);
+int					mouse_move(int x, int y, t_game *game);
 
 /* errors and freeing functions */
 void				free_game(t_game *game, const char *error_msg);
