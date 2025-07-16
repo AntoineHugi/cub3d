@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation_color.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahugi <ahugi@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/16 11:23:41 by ahugi             #+#    #+#             */
+/*   Updated: 2025/07/16 11:23:42 by ahugi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 /* checks that the value is within the rgb range */
@@ -31,6 +43,8 @@ static int	valid_rgb_code(char *input)
 			i++;
 			j++;
 		}
+		if (j == 0)
+			return (0);
 		j = 0;
 		if (!valid_rgb_value(value))
 			return (0);
@@ -44,11 +58,11 @@ static int	valid_rgb_code(char *input)
 static int	valid_rgb_format(char *input)
 {
 	int	i;
-	int	element_counter;
+	int	elem_counter;
 	int	code_counter;
 
 	i = 0;
-	element_counter = 1;
+	elem_counter = 1;
 	code_counter = 0;
 	while (input[i] && input[i] != '\n')
 	{
@@ -56,16 +70,16 @@ static int	valid_rgb_format(char *input)
 			code_counter++;
 		else if (ft_isdigit(input[i]) && code_counter > 3)
 			return (0);
-		else if (input[i] == ',' && i != 0 && element_counter < 3)
+		else if (input[i] == ',' && i != 0 && elem_counter < 3 && input[i + 1])
 		{
 			code_counter = 0;
-			element_counter++;
+			elem_counter++;
 		}
 		else
 			return (0);
 		i++;
 	}
-	if (element_counter != 3)
+	if (elem_counter != 3)
 		return (0);
 	return (1);
 }

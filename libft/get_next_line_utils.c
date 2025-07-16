@@ -12,27 +12,6 @@
 
 #include "libft.h"
 
-void	*ft_gnl_calloc(size_t nmemb, size_t size)
-{
-	unsigned char	*z_ptr;
-	void			*ptr;
-	size_t			i;
-
-	if (nmemb * size > 2147483647)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	z_ptr = (unsigned char *)ptr;
-	while (i < size * nmemb)
-	{
-		z_ptr[i] = 0;
-		i++;
-	}
-	return (ptr);
-}
-
 void	ft_gnl_memcpy(char *dst, char *src, size_t n)
 {
 	size_t	i;
@@ -57,7 +36,7 @@ char	*ft_gnl_strjoin(char *s1, char *s2)
 		return (NULL);
 	s1_size = ft_strlen(s1);
 	s2_size = ft_strlen(s2);
-	result = (char *)ft_gnl_calloc((s1_size + s2_size + 1), sizeof(char));
+	result = (char *)ft_calloc((s1_size + s2_size + 1), sizeof(char));
 	if (!result)
 	{
 		if (s1)
@@ -85,7 +64,7 @@ char	*ft_strchr_mod(char *s)
 		i++;
 	if (s[i] == '\n')
 		i++;
-	ptr = (char *)ft_gnl_calloc(ft_strlen(s + i) + 1, sizeof(char));
+	ptr = (char *)ft_calloc(ft_strlen(s + i) + 1, sizeof(char));
 	if (!ptr)
 	{
 		if (s)

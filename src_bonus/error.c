@@ -1,17 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahugi <ahugi@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/16 11:24:51 by ahugi             #+#    #+#             */
+/*   Updated: 2025/07/16 13:31:07 by ahugi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
-
-void	*safe_malloc(size_t size)
-{
-	void	*ptr;
-
-	ptr = malloc(size);
-	if (!ptr)
-	{
-		fprintf(stderr, "Error: Memory allocation failed\n");
-		exit(EXIT_FAILURE);
-	}
-	return (ptr);
-}
 
 int	validation_error(t_game *game, const char *error_msg)
 {

@@ -1,14 +1,15 @@
 # Compiler and flags
-NAME       		:=	cub3D
-CC         		:=	cc
-CFLAGS     		:=	-Wall -Werror -Wextra #-fsanitize=address -g
-RM         		:=	rm -f
+NAME			:=	cub3D
+NAME_BONUS		:=	cub3D_bonus
+CC				:=	cc
+CFLAGS			:=	-Wall -Werror -Wextra #-fsanitize=address -g
+RM				:=	rm -f
 SRC_DIR			:=	./src
-SRC_BONUS_DIR		:=	./src_bonus
+SRC_BONUS_DIR	:=	./src_bonus
 LIBFT_DIR		:=	./libft/
 LIBFT			:=	./src/libft/libft.a
 DEF_COLOUR 		:=	\033[0;39m
-GREEN      		:=	\033[1;92m
+GREEN			:=	\033[1;92m
 
 # OS-specific flags
 ifeq ($(shell uname), Linux)
@@ -25,7 +26,7 @@ endif
 
 # Sources and Objects
 SRCS       		:=	$(addprefix $(SRC_DIR)/, error.c freeing.c initialisation_game.c initialisation_raycasting.c \
-						key_hooks.c main.c map_creation.c mouse_hook.c move_player.c move_view.c \
+						key_hooks.c main.c map_creation.c move_player.c move_view.c \
 						parsing_element.c parsing_file.c raycasting_calculation.c render_map.c \
 						validation_color.c validation_element.c validation_file.c validation_map.c )
 
@@ -63,11 +64,16 @@ endif
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
 
-bonus: $(OBJS_BONUS) $(LIBFT) $(MLX)
+bonus: $(LIBFT) $(MLX) $(NAME_BONUS)
 	@$(MAKE) -C $(MLX_DIR)
 	@$(MAKE) -C $(LIBFT_DIR)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS_BONUS) -L$(LIBFT_DIR) $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) -o $(NAME_BONUS) $(OBJS_BONUS) -L$(LIBFT_DIR) $(MLX_FLAGS)
 	@echo "$(GREEN) cub3D bonus ✔︎$(DEF_COLOUR)"
+
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) -o $(NAME_BONUS) $(OBJS_BONUS) -L$(LIBFT_DIR) $(MLX_FLAGS)
+	@echo "$(GREEN) $(NAME_BONUS) ✔︎ $(DEF_COLOUR)"
+	@echo "$(GREEN) Usage: ./$(NAME_BONUS) ./maps/valid/'select a map' ✔︎ $(DEF_COLOUR)"
 
 clean:
 	@$(RM) $(OBJS) $(OBJS_BONUS)
@@ -76,6 +82,7 @@ clean:
 	@echo "$(GREEN)Object files removed!$(DEF_COLOUR)"
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) $(NAME_BONUS)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@rm -rf $(MLX_DIR)
 	@echo "$(NAME) removed!"

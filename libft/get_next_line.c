@@ -24,7 +24,7 @@ static char	*create_line(char *str)
 		count++;
 	if (str[count] == '\n')
 		count++;
-	line = (char *)ft_gnl_calloc(count + 1, sizeof(char));
+	line = (char *)ft_calloc(count + 1, sizeof(char));
 	if (!line)
 		return (NULL);
 	ft_gnl_memcpy(line, str, count);
@@ -53,7 +53,7 @@ static char	*read_file(int fd, char *result)
 	char	*buffer;
 	ssize_t	bytes_read;
 
-	buffer = (char *)ft_gnl_calloc((BUFFER_SIZE + 1), sizeof(char));
+	buffer = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!buffer)
 		return (NULL);
 	bytes_read = read(fd, buffer, BUFFER_SIZE);

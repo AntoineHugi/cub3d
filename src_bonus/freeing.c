@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   freeing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahugi <ahugi@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/16 13:31:10 by ahugi             #+#    #+#             */
+/*   Updated: 2025/07/16 13:31:11 by ahugi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 void	free_texture_img(t_game *game)
@@ -71,5 +83,5 @@ void	free_game(t_game *game, const char *error_message)
 		free(game->mlx);
 	}
 	if (error_message)
-		fprintf(stderr, "Error: %s\n", error_message);
+		printf("Error: %s\n", error_message);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahugi <ahugi@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/16 11:21:20 by ahugi             #+#    #+#             */
+/*   Updated: 2025/07/16 11:21:22 by ahugi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -165,5 +177,5 @@ int					initialisation_error(t_game *game, char *error_msg);
 
 /* utils */
 char				*remove_whitespaces(char *str, int i, int j);
-void				*safe_malloc(size_t size);
+
 #endif

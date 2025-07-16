@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_file.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahugi <ahugi@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/16 13:32:17 by ahugi             #+#    #+#             */
+/*   Updated: 2025/07/16 13:32:18 by ahugi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 /* Gets the of the map element in the file */
@@ -112,6 +124,6 @@ int	parsing_file(t_game *game, char *file_path)
 	file_array_creation(game, file_path);
 	init_game_struct(game);
 	if (!valid_file(game))
-		validation_error(game, "Invalid file format or content.");
+		validation_error(game, NULL);
 	return (1);
 }
