@@ -31,7 +31,7 @@ SRCS       		:=	$(addprefix $(SRC_DIR)/, error.c freeing.c initialisation_game.c
 						validation_color.c validation_element.c validation_file.c validation_map.c )
 
 SRCS_BONUS 		:=	$(addprefix $(SRC_BONUS_DIR)/, error.c freeing.c initialisation_game.c initialisation_raycasting.c \
-						key_hooks.c main.c map_creation.c mouse_hook.c move_player.c move_view.c \
+						key_hooks.c main.c map_creation.c mouse_hook.c move_player.c move_view.c minimap.c \
 						parsing_element.c parsing_file.c raycasting_calculation.c render_map.c \
 						validation_color.c validation_element.c validation_file.c validation_map.c )
 OBJS			:=	$(SRCS:.c=.o)

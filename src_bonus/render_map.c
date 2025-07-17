@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahugi <ahugi@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: bokwuful <<bokwuful@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 13:32:26 by ahugi             #+#    #+#             */
-/*   Updated: 2025/07/16 13:32:27 by ahugi            ###   ########.fr       */
+/*   Updated: 2025/07/17 12:15:51 by bokwuful         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	render_map(t_game *game)
 			render_ray(game, &game->rc, i);
 		i++;
 	}
+	render_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->frame.ptr, 0, 0);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahugi <ahugi@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: bokwuful <<bokwuful@student.42berlin.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:21:20 by ahugi             #+#    #+#             */
-/*   Updated: 2025/07/16 11:21:22 by ahugi            ###   ########.fr       */
+/*   Updated: 2025/07/17 12:31:42 by bokwuful         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,20 @@
 # define BACKWARD 2
 # define RIGHT 3
 # define LEFT 4
+
 # define WIN_HEIGHT 800
 # define WIN_WIDTH 1024
 # define PI 3.14159265358979323846
+
+// *** BONUS: Minimap Macros *** //
+# define MINIMAP_SCALE 10
+# define MINIMAP_BORDER 10
+# define PLAYER_SIZE 4
+# define WALL_COLOR 0x222222
+# define FLOOR_COLOR 0x888888
+# define PLAYER_COLOR 0xFF0000
+
+// *** OS-specific includes and definitions *** //
 # ifdef __APPLE__
 #  include "../minilibx_macos/mlx.h"
 #  define KEY_W 13
@@ -49,6 +60,7 @@
 #  define KEY_ESC 65307
 # endif
 
+// *** Struct definitions *** //
 typedef struct s_img
 {
 	void			*ptr;
@@ -144,6 +156,7 @@ typedef struct s_game
 	int				mouse_y;
 }					t_game;
 
+// *** Function Prototypes *** //
 /* Parsing functions */
 int					parsing_file(t_game *game, char *file_path);
 int					valid_file(t_game *game);
@@ -177,5 +190,9 @@ int					initialisation_error(t_game *game, char *error_msg);
 
 /* utils */
 char				*remove_whitespaces(char *str, int i, int j);
+
+/*** BONUS */
+// Minimap functions
+void				render_minimap(t_game *game);
 
 #endif
